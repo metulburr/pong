@@ -1,6 +1,7 @@
 
 import pygame as pg
 import random
+from .sound import Sound
 
 class Ball:
     def __init__(self, screen_rect, width, height, color=(255,255,255)):
@@ -12,6 +13,13 @@ class Ball:
         self.surface.fill(self.color)
         self.speed = 5
         self.set_ball()
+        self.sound_init()
+        
+    def sound_init(self):
+        self.bounce = Sound('resources/sound/boing.wav')
+        self.bounce.sound.set_volume(.5)
+        self.gutter = Sound('resources/sound/whoosh.wav')
+        self.gutter.sound.set_volume(.1)
         
     def set_ball(self):
         self.vel = [random.choice([-1, 1]), random.choice([-1, 1])]
@@ -20,20 +28,22 @@ class Ball:
         
     def collide_walls(self):
         if self.rect.x < 0:
-            #print('left player hit')
+            self.gutter.sound.play()
             self.set_ball()
             return -1
         elif self.rect.x > self.screen_rect.right:
-            #print('right player hit')
+            self.gutter.sound.play()
             self.set_ball()
             return 1
         if self.rect.y < 0 or self.rect.y > self.screen_rect.bottom:
+            self.bounce.sound.play()
             self.vel[1] *= -1;
         return 0
             
     def collide_paddle(self, paddle_left_rect, paddle_right_rect):
         if self.rect.colliderect(paddle_left_rect) or self.rect.colliderect(paddle_right_rect):
             self.vel[0] *= -1;
+            self.bounce.sound.play()
             
     def move(self):
         self.true_pos[0] += self.vel[0] * self.speed
