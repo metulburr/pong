@@ -3,8 +3,6 @@ import pygame as pg
 
 class Paddle:
     def __init__(self, x, y, width, height, color=(255,255,255)):
-        self.width = width
-        self.height = height
         self.surface = pg.Surface([width, height])
         self.rect = self.surface.get_rect()
         self.rect.x = x

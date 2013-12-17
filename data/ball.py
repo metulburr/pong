@@ -1,24 +1,34 @@
 
 import pygame as pg
+import random
 
 class Ball:
     def __init__(self, screen_rect, width, height, color=(255,255,255)):
-        self.width = width
-        self.height = height
+        self.screen_rect = screen_rect
         self.surface = pg.Surface([width, height])
         self.rect = self.surface.get_rect()
         self.rect.center = screen_rect.center
         self.color = color
         self.surface.fill(self.color)
-        self.speed = 20
+        self.speed = 5
+        self.vel = [random.choice([-1, 1]), random.choice([-1, 1])]
+        self.true_pos = list(self.rect.center)
         
-    def move(self, x, y):
-        self.rect[0] += x * self.speed
-        self.rect[1] += y * self.speed
+    def collide_walls(self):
+        if self.rect.x < 0 or self.rect.x > self.screen_rect.right:
+            self.vel[0] *= -1;
+        elif self.rect.y < 0 or self.rect.y > self.screen_rect.bottom:
+            self.vel[1] *= -1;
+            
+    def move(self):
+        self.true_pos[0] += self.vel[0] * self.speed
+        self.true_pos[1] += self.vel[1] * self.speed
+        self.rect.center = self.true_pos
         
     def update(self):
-        pass
-        
+        self.collide_walls()
+        self.move()
+
     def render(self, screen):
         screen.blit(self.surface, self.rect)
         

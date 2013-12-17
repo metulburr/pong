@@ -1,5 +1,5 @@
 
-
+import os
 import pygame as pg
 from .ball import Ball
 from .paddle import Paddle
@@ -11,7 +11,9 @@ class Control:
         if fullscreen:
             self.screen = pg.display.set_mode(self.screensize, pg.FULLSCREEN)
         else:
+            os.environ["SDL_VIDEO_CENTERED"] = "True"
             self.screen = pg.display.set_mode(self.screensize)
+        pg.display.set_caption("Pong")
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.fps = 60
@@ -25,7 +27,6 @@ class Control:
         paddle_y = self.screen_rect.centery - (paddle_height // 2)
         padding = 25 #padding from wall
         pad_right = self.screensize[0] - paddle_width - padding
-        
         
         self.ball = Ball(self.screen_rect, 10,10, (0,255,0))
         self.paddle_left = Paddle(padding,paddle_y, paddle_width,paddle_height, (150,150,150))
