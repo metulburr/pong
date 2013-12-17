@@ -34,8 +34,10 @@ class Control:
         self.ball = Ball(self.screen_rect, 10,10, (0,255,0))
         self.paddle_left = Paddle(padding,paddle_y, paddle_width,paddle_height, (150,150,150))
         self.paddle_right = Paddle(pad_right,paddle_y, paddle_width,paddle_height, (150,150,150))
-        self.scoreboard = Font((self.screen_rect.centerx ,0), color=(80,80,80), size=100)
+        self.scoreboard = Font((self.screen_rect.centerx , 50), color=(80,80,80), size=100)
         self.pause_notice = Font(self.screen_rect.center, color=(255,255,255), size=60)
+        
+
         
     def events(self):
         for event in pg.event.get():
