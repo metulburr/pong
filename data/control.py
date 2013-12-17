@@ -52,9 +52,9 @@ class Control:
     def update(self):
         self.keys = pg.key.get_pressed()
         self.clock.tick(self.fps)
-        self.ball.update()
         self.paddle_left.update(self.screen_rect)
         self.paddle_right.update(self.screen_rect)
+        self.ball.update(self.paddle_left.rect, self.paddle_right.rect)
         
     def render(self):
         self.screen.fill((0,0,0))
