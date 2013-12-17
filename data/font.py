@@ -21,4 +21,5 @@ class Font:
         self.surface = self.init(text)
         
     def render(self, screen):
-        screen.blit(self.label, self.label_rect)
+        #screen.blit(self.label, self.label_rect)
+        screen.blit(self.label, (screen.get_rect().centerx-(self.label_rect.width//2),0))

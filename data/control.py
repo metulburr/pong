@@ -70,7 +70,6 @@ class Control:
         self.ball.render(self.screen)
         self.paddle_left.render(self.screen)
         self.paddle_right.render(self.screen)
-        
         pg.display.update()
         
     def run(self):
@@ -79,20 +78,10 @@ class Control:
             self.update()
             self.render()
             
-            
     def adjust_score(self, hit_side):
         if hit_side == -1:
             self.score[1] += 1
         elif hit_side == 1:
             self.score[0] += 1
-            
-    def write(self, displaytext, color=(0,0,0), size=15, ul=False, bold=False,
-            ital=False, font='timesnewroman'):
-        font = pg.font.SysFont(font, size)
-        font.set_underline(ul)
-        font.set_bold(bold)
-        font.set_italic(ital)
-        label = font.render(displaytext, 1, color)
-        label_rect = label.get_rect()
-        return label,label_rect
+
 
