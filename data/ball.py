@@ -26,9 +26,19 @@ class Ball:
         self.gutter = Sound('resources/sound/whoosh.wav')
         self.gutter.sound.set_volume(.1)
         
+    def get_random_float(self):
+        '''get float for velocity of ball on starting direction'''
+        while True:
+            num = random.uniform(-1.0, 1.0)
+            if num > -.5 and num < .5:
+                continue
+            else:
+                return num
+        
+        
     def set_ball(self):
-        self.vel = [random.choice([-1, 1]), random.choice([-1, 1])]
-        #self.vel = [random.uniform(-1.0, 1.0), random.uniform(-1.0, 1.0)]
+        #self.vel = [random.choice([-1, 1]), random.choice([-1, 1])]
+        self.vel = [self.get_random_float(), self.get_random_float()]
         self.rect.center = self.center_screen
         self.true_pos = list(self.rect.center)
         
