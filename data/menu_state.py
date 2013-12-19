@@ -13,6 +13,7 @@ class MenuState:
         self.done = False
         self.bg_color = (25,25,25)
         self.next = "GAME"
+        self.timer = 0.0
         
     def update_text(self):
         self.text,self.text_rect = self.make_text("Start Game",

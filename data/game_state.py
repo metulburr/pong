@@ -13,6 +13,7 @@ class GameState:
             (255,255,255), screen_rect.center, 50)
         self.done = False
         self.next = "MENU"
+        self.timer = 0.0
         
         #game specific content
         self.bg_color = (0,0,0)
@@ -45,6 +46,7 @@ class GameState:
                     self.pause = True
                 else:
                     self.pause = False
+
         if keys[pg.K_w]:
             self.paddle_left.move(0, -1)
         if keys[pg.K_s]:
@@ -53,11 +55,11 @@ class GameState:
             self.paddle_right.move(0, -1)
         if keys[pg.K_DOWN]:
             self.paddle_right.move(0, 1)
-
+        
     def update(self, now, keys):
         if not self.pause:
             self.score_text, self.score_rect = self.make_text('{}:{}'.format(self.score[0], self.score[1]),
-                (255,255,255), (self.screen_rect.centerx,100), 50)
+                (255,255,255), (self.screen_rect.centerx,25), 50)
             self.paddle_left.update(self.screen_rect)
             self.paddle_right.update(self.screen_rect)
             hit_side = self.ball.update(self.paddle_left.rect, self.paddle_right.rect)

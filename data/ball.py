@@ -5,6 +5,8 @@ from .sound import Sound
 
 class Ball:
     def __init__(self, screen_rect, width, height, color=(255,255,255)):
+        self.width = width
+        self.height = height
         self.screen_rect = screen_rect
         self.surface = pg.Surface([width, height])
         self.rect = self.surface.get_rect()
@@ -26,6 +28,7 @@ class Ball:
         
     def set_ball(self):
         self.vel = [random.choice([-1, 1]), random.choice([-1, 1])]
+        #self.vel = [random.uniform(-1.0, 1.0), random.uniform(-1.0, 1.0)]
         self.rect.center = self.center_screen
         self.true_pos = list(self.rect.center)
         
@@ -41,7 +44,7 @@ class Ball:
             self.gutter.sound.play()
             self.set_ball()
             return 1
-        if self.rect.y < 0 or self.rect.y > self.screen_rect.bottom:
+        if self.rect.y < 0 or self.rect.y > self.screen_rect.bottom - self.height:
             self.bounce.sound.play()
             self.vel[1] *= -1;
         return 0
