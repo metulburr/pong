@@ -32,6 +32,7 @@ class Control:
             elif event.type in (pg.KEYDOWN,pg.KEYUP):
                 self.keys = pg.key.get_pressed()
             self.state.get_event(event, self.keys)
+        self.state.const_event(self.keys)
 
     def change_state(self):
         if self.state.done:

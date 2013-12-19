@@ -46,7 +46,8 @@ class GameState:
                     self.pause = True
                 else:
                     self.pause = False
-
+                    
+    def const_event(self, keys):
         if keys[pg.K_w]:
             self.paddle_left.move(0, -1)
         if keys[pg.K_s]:
