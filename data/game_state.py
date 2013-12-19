@@ -70,7 +70,7 @@ class GameState:
             self.pause_text, self.pause_rect = self.make_text("PAUSED",
                 (255,255,255), self.screen_rect.center, 50)
         pg.display.set_caption('Ball speed: {}'.format(self.ball.speed))
-        #pg.mouse.set_visible(False)
+        pg.mouse.set_visible(False)
 
     def render(self, screen):
         screen.fill(self.bg_color)
