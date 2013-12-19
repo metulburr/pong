@@ -37,9 +37,6 @@ class MenuState:
             if self.text_rect.collidepoint(pg.mouse.get_pos()):
                 self.done = True
                 self.next = 'GAME'
-                
-    def const_event(self, keys):
-        pass
 
     def update(self, now, keys):
         pg.mouse.set_visible(True)
