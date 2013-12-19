@@ -20,7 +20,7 @@ class Control:
         self.done = False
         self.state_dict = {
             "MENU" : MenuState(self.screen_rect),
-            "GAME"  : GameState(self.screen_rect)
+            "PLAY"  : GameState(self.screen_rect)
         }
         self.state_name = "MENU"
         self.state = self.state_dict[self.state_name]
@@ -44,7 +44,7 @@ class Control:
             now = pg.time.get_ticks()
             self.event_loop()
             self.change_state()
-            self.state.update(now, self.keys)
+            self.done = self.state.update(now, self.keys)
             self.state.render(self.screen)
             pg.display.update()
             self.clock.tick(self.fps)

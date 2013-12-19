@@ -42,10 +42,7 @@ class GameState:
                 self.next = 'MENU'
                 self.reset()
             elif event.key == pg.K_p:
-                if not self.pause:
-                    self.pause = True
-                else:
-                    self.pause = False
+                self.pause = not self.pause
                     
     def movement(self, keys):
         if keys[pg.K_w]:
