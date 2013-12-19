@@ -19,7 +19,7 @@ class MenuState:
                 self.next = 'GAME'
 
     def update(self, now, keys):
-        pass
+        pg.display.set_caption("Pong")
 
     def render(self, screen):
         screen.fill(self.bg_color)

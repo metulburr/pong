@@ -13,7 +13,6 @@ class Control:
         else:
             os.environ["SDL_VIDEO_CENTERED"] = "True"
             self.screen = pg.display.set_mode(self.screensize)
-        pg.display.set_caption("Pong")
         self.screen_rect = self.screen.get_rect()
         self.clock = pg.time.Clock()
         self.fps = 60
