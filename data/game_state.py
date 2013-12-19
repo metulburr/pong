@@ -16,7 +16,6 @@ class GameState:
         
         #game specific content
         self.bg_color = (0,0,0)
-        self.keys = pg.key.get_pressed()
         self.pause = False
         self.score = [0,0]
                 
@@ -35,7 +34,7 @@ class GameState:
         self.score = [0,0]
         self.ball.set_ball()
     
-    def get_event(self,event):
+    def get_event(self, event, keys):
         if event.type == pg.KEYDOWN:
             if event.key == pg.K_ESCAPE:
                 self.done = True
@@ -46,18 +45,16 @@ class GameState:
                     self.pause = True
                 else:
                     self.pause = False
-        if self.keys[pg.K_w]:
+        if keys[pg.K_w]:
             self.paddle_left.move(0, -1)
-        if self.keys[pg.K_s]:
+        if keys[pg.K_s]:
             self.paddle_left.move(0, 1)
-        if self.keys[pg.K_UP]:
+        if keys[pg.K_UP]:
             self.paddle_right.move(0, -1)
-        if self.keys[pg.K_DOWN]:
+        if keys[pg.K_DOWN]:
             self.paddle_right.move(0, 1)
 
-
     def update(self, now, keys):
-        self.keys = pg.key.get_pressed()
         if not self.pause:
             self.score_text, self.score_rect = self.make_text('{}:{}'.format(self.score[0], self.score[1]),
                 (255,255,255), (self.screen_rect.centerx,100), 50)
@@ -70,6 +67,7 @@ class GameState:
             self.pause_text, self.pause_rect = self.make_text("PAUSED",
                 (255,255,255), self.screen_rect.center, 50)
         pg.display.set_caption('Ball speed: {}'.format(self.ball.speed))
+        #pg.mouse.set_visible(False)
 
     def render(self, screen):
         screen.fill(self.bg_color)
