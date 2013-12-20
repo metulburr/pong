@@ -5,13 +5,12 @@ import pygame as pg
 class MenuState:
     def __init__(self, screen_rect):
         self.screen_rect = screen_rect
-        self.options = ['Play', 'Quit']
-        self.next_list = ['PLAY']
+        self.options = ['Play', 'Controls', 'Quit']
+        self.next_list = ['PLAY', 'CONTROLS']
         self.title, self.title_rect = self.make_text('Pong', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.text_basic_color = (255,255,255)
         self.text_hover_color = (255,0,0)
         self.text_color = self.text_basic_color 
-        self.update_text()
         self.done = False
         self.bg_color = (25,25,25)
         self.next = "PLAY"
@@ -20,13 +19,11 @@ class MenuState:
         self.from_bottom = 200
         self.spacer = 75
         self.quit = False
-        
-    def update_text(self):
-        self.text, self.text_rect = self.make_text("Play",
-            self.text_color, (self.screen_rect.centerx,100), 50)
     
     def get_event(self, event, keys):
-        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+        if event.type == pg.QUIT:
+            self.quit = True
+        elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
             for i,opt in enumerate(self.rendered["des"]):
                 if opt[1].collidepoint(pg.mouse.get_pos()):
                     if i == len(self.next_list):
@@ -38,7 +35,7 @@ class MenuState:
 
     def update(self, now, keys):
         pg.mouse.set_visible(True)
-        pg.display.set_caption("Pong")
+        pg.display.set_caption("2 Player Pong")
         if self.quit:
             return True
 

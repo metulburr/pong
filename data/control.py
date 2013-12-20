@@ -3,6 +3,7 @@ import os
 import pygame as pg
 from .game_state import GameState
 from .menu_state import MenuState
+from .controls_state import Controls
 
 class Control:
     def __init__(self, fullscreen):
@@ -20,7 +21,8 @@ class Control:
         self.done = False
         self.state_dict = {
             "MENU" : MenuState(self.screen_rect),
-            "PLAY"  : GameState(self.screen_rect)
+            "PLAY"  : GameState(self.screen_rect),
+            "CONTROLS" : Controls(self.screen_rect)
         }
         self.state_name = "MENU"
         self.state = self.state_dict[self.state_name]

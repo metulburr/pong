@@ -6,7 +6,6 @@ import pygame as pg
 class GameState:
     def __init__(self, screen_rect):
         self.screen_rect = screen_rect
-        self.options = ['Play', 'Quit']
         self.score_text, self.score_rect = self.make_text("SCOREBOARD_PLACEHOLDER",
             (255,255,255), (screen_rect.centerx,100), 50)
         self.pause_text, self.pause_rect = self.make_text("PAUSED",
@@ -14,6 +13,7 @@ class GameState:
         self.done = False
         self.next = "MENU"
         self.timer = 0.0
+        self.quit = False
         
         #game specific content
         self.bg_color = (0,0,0)
@@ -36,7 +36,9 @@ class GameState:
         self.ball.set_ball()
     
     def get_event(self, event, keys):
-        if event.type == pg.KEYDOWN:
+        if event.type == pg.QUIT:
+            self.quit = True
+        elif event.type == pg.KEYDOWN:
             if event.key == pg.K_ESCAPE:
                 self.done = True
                 self.next = 'MENU'
@@ -69,6 +71,8 @@ class GameState:
         pg.display.set_caption('Ball speed: {}'.format(self.ball.speed))
         pg.mouse.set_visible(False)
         self.movement(keys)
+        if self.quit:
+            return True
 
     def render(self, screen):
         screen.fill(self.bg_color)
