@@ -1,6 +1,7 @@
 
 
 import pygame as pg
+from .sound import Sound
 
 class MenuState:
     def __init__(self, screen_rect):
@@ -19,6 +20,11 @@ class MenuState:
         self.from_bottom = 200
         self.spacer = 75
         self.quit = False
+        self.sound_init()
+        
+    def sound_init(self):
+        self.button_sound = Sound('resources/sound/button.wav')
+        self.button_sound.sound.set_volume(.1)
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
@@ -29,6 +35,7 @@ class MenuState:
                     if i == len(self.next_list):
                         self.quit = True
                     else:
+                        self.button_sound.sound.play()
                         self.next = self.next_list[i]
                         self.done = True
                     break

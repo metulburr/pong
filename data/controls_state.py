@@ -1,5 +1,6 @@
 
 import pygame as pg
+from .sound import Sound
 
 class Controls:
     def __init__(self, screen_rect):
@@ -22,12 +23,18 @@ class Controls:
         self.from_bottom = 200
         self.spacer = 25
         self.quit = False
+        self.sound_init()
+        
+    def sound_init(self):
+        self.button_sound = Sound('resources/sound/button.wav')
+        self.button_sound.sound.set_volume(.1)
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
             self.quit = True
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_ESCAPE:
+                self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
 

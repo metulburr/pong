@@ -2,6 +2,7 @@
 from .ball import Ball
 from .paddle import Paddle
 import pygame as pg
+from .sound import Sound
 
 class GameState:
     def __init__(self, screen_rect):
@@ -30,6 +31,12 @@ class GameState:
         self.paddle_left = Paddle(padding,paddle_y, paddle_width,paddle_height, (150,150,150))
         self.paddle_right = Paddle(pad_right,paddle_y, paddle_width,paddle_height, (150,150,150))
         
+        self.sound_init()
+        
+    def sound_init(self):
+        self.button_sound = Sound('resources/sound/button.wav')
+        self.button_sound.sound.set_volume(.1)
+        
     def reset(self):
         self.pause = False
         self.score = [0,0]
@@ -40,6 +47,7 @@ class GameState:
             self.quit = True
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_ESCAPE:
+                self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
                 self.reset()
