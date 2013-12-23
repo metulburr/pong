@@ -26,7 +26,7 @@ class Controls:
         self.sound_init()
         
     def sound_init(self):
-        self.button_sound = Sound('resources/sound/button.wav')
+        self.button_sound = Sound('button.wav')
         self.button_sound.sound.set_volume(.1)
     
     def get_event(self, event, keys):

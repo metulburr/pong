@@ -4,6 +4,7 @@ from .paddle import Paddle
 import pygame as pg
 from .sound import Sound
 
+
 class GameState:
     def __init__(self, screen_rect):
         self.screen_rect = screen_rect
@@ -34,7 +35,7 @@ class GameState:
         self.sound_init()
         
     def sound_init(self):
-        self.button_sound = Sound('resources/sound/button.wav')
+        self.button_sound = Sound('button.wav')
         self.button_sound.sound.set_volume(.1)
         
     def reset(self):
@@ -81,6 +82,7 @@ class GameState:
         self.movement(keys)
         if self.quit:
             return True
+            
 
     def render(self, screen):
         screen.fill(self.bg_color)

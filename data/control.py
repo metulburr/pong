@@ -4,6 +4,8 @@ import pygame as pg
 from .game_state import GameState
 from .menu_state import MenuState
 from .controls_state import Controls
+from .sound import Sound, Music
+
 
 class Control:
     def __init__(self, fullscreen):
@@ -26,6 +28,12 @@ class Control:
         }
         self.state_name = "MENU"
         self.state = self.state_dict[self.state_name]
+        
+        self.music = Music()
+        pg.mixer.music.set_volume(.2)
+        
+        pg.mixer.music.play(-1, 0.0)
+        
 
     def event_loop(self):
         for event in pg.event.get():

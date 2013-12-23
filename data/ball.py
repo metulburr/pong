@@ -21,9 +21,9 @@ class Ball:
         self.sound_init()
         
     def sound_init(self):
-        self.bounce = Sound('resources/sound/boing.wav')
+        self.bounce = Sound('boing.wav')
         self.bounce.sound.set_volume(.5)
-        self.gutter = Sound('resources/sound/whoosh.wav')
+        self.gutter = Sound('whoosh.wav')
         self.gutter.sound.set_volume(.1)
         
     def get_random_float(self):
