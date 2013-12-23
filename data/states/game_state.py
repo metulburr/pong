@@ -1,9 +1,8 @@
 
-from .ball import Ball
-from .paddle import Paddle
 import pygame as pg
-from .sound import Sound
-
+from ..ball import Ball
+from ..paddle import Paddle
+from ..sound import Sound
 
 class GameState:
     def __init__(self, screen_rect):

@@ -1,6 +1,6 @@
 
 import pygame as pg
-from .sound import Sound
+from ..sound import Sound
 
 class Controls:
     def __init__(self, screen_rect):

@@ -1,9 +1,9 @@
 
 import os
 import pygame as pg
-from .game_state import GameState
-from .menu_state import MenuState
-from .controls_state import Controls
+from .states.game_state import GameState
+from .states.menu_state import MenuState
+from .states.controls_state import Controls
 from .sound import Sound, Music
 
 

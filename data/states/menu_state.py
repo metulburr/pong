@@ -1,7 +1,7 @@
 
 
 import pygame as pg
-from .sound import Sound, Music
+from ..sound import Sound, Music
 
 class MenuState:
     def __init__(self, screen_rect):
