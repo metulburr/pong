@@ -1,6 +1,7 @@
 
 import pygame as pg
 import os
+import random
 
 class Sound:
     def __init__(self, filename):
@@ -12,13 +13,11 @@ class Sound:
 class Music:
     def __init__(self):
         self.path = 'resources/music'
-        self.load()
-        
-    def load(self):
-        for f in os.listdir(self.path):
-            end_path = os.path.join(self.path, f)
-            abspath = os.path.abspath(end_path)
-            pg.mixer.music.load(abspath)
-            pg.mixer.music.queue(abspath)
-        
-
+        self.track_end = pg.USEREVENT+1
+        self.tracks = []
+        self.track = 0
+        for track in os.listdir(self.path):
+            self.tracks.append(os.path.join(self.path, track))
+        random.shuffle(self.tracks)
+        pg.mixer.music.set_endevent(self.track_end)
+        pg.mixer.music.load(self.tracks[0])

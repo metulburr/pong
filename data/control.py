@@ -29,11 +29,6 @@ class Control:
         self.state_name = "MENU"
         self.state = self.state_dict[self.state_name]
         
-        self.music = Music()
-        pg.mixer.music.set_volume(.2)
-        
-        pg.mixer.music.play(-1, 0.0)
-        
 
     def event_loop(self):
         for event in pg.event.get():

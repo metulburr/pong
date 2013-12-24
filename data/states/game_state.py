@@ -2,7 +2,7 @@
 import pygame as pg
 from ..ball import Ball
 from ..paddle import Paddle
-from ..sound import Sound
+from ..sound import Sound, Music
 
 class GameState:
     def __init__(self, screen_rect):
@@ -36,6 +36,9 @@ class GameState:
     def sound_init(self):
         self.button_sound = Sound('button.wav')
         self.button_sound.sound.set_volume(.1)
+        self.background_music = Music()
+        pg.mixer.music.play()
+        
         
     def reset(self):
         self.pause = False
@@ -53,6 +56,10 @@ class GameState:
                 self.reset()
             elif event.key == pg.K_p:
                 self.pause = not self.pause
+        elif event.type == self.background_music.track_end:
+            self.background_music.track = (self.background_music.track+1) % len(self.background_music.tracks)
+            pg.mixer.music.load(self.background_music.tracks[self.background_music.track]) 
+            pg.mixer.music.play()
                     
     def movement(self, keys):
         if keys[pg.K_w]:
