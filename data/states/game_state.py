@@ -110,7 +110,7 @@ class GameState:
             
     def cleanup(self):
         pg.mixer.music.stop()
-        self.background_music.randomize()
+        self.background_music.init()
         
     def entry(self):
         pg.mixer.music.play()
