@@ -44,6 +44,7 @@ class Control:
 
     def change_state(self):
         if self.state.done:
+            self.state.cleanup()
             self.state_name = self.state.next
             self.state.done = False
             self.state = self.state_dict[self.state_name]

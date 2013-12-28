@@ -83,7 +83,7 @@ class Controls:
         return text,rect
         
     def pre_render_listings(self):
-        listing_text = pg.font.Font("resources/fonts/Megadeth.ttf",25)
+        listing_text = pg.font.Font("resources/fonts/impact.ttf",25)
         rendered_msg = {"des":[],"sel":[]}
         for listing in self.listings:
             text = listing_text.render(listing, 1, (255,255,255))
@@ -104,3 +104,6 @@ class Controls:
             rendered_msg["des"].append((d_rend,d_rect))
             rendered_msg["sel"].append((s_rend,s_rect))
         self.rendered = rendered_msg
+
+    def cleanup(self):
+        pass

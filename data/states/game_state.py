@@ -108,3 +108,6 @@ class GameState:
             self.score[1] += 1
         elif hit_side == 1:
             self.score[0] += 1
+            
+    def cleanup(self):
+        pg.mixer.music.stop()

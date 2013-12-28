@@ -77,3 +77,6 @@ class MenuState:
             rendered_msg["des"].append((d_rend,d_rect))
             rendered_msg["sel"].append((s_rend,s_rect))
         self.rendered = rendered_msg
+        
+    def cleanup(self):
+        pass
