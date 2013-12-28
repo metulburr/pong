@@ -80,3 +80,6 @@ class MenuState:
         
     def cleanup(self):
         pass
+        
+    def entry(self):
+        pass

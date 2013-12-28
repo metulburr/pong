@@ -18,7 +18,10 @@ class Music:
         self.track = 0
         for track in os.listdir(self.path):
             self.tracks.append(os.path.join(self.path, track))
-        random.shuffle(self.tracks)
+        self.randomize()
         pg.mixer.music.set_volume(.3)
         pg.mixer.music.set_endevent(self.track_end)
         pg.mixer.music.load(self.tracks[0])
+        
+    def randomize(self):
+        random.shuffle(self.tracks)

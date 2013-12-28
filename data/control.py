@@ -48,6 +48,7 @@ class Control:
             self.state_name = self.state.next
             self.state.done = False
             self.state = self.state_dict[self.state_name]
+            self.state.entry()
 
     def run(self):
         while not self.done:

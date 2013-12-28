@@ -37,7 +37,6 @@ class GameState:
         self.button_sound = Sound('button.wav')
         self.button_sound.sound.set_volume(.1)
         self.background_music = Music()
-        pg.mixer.music.play()
         
     def reset(self):
         self.pause = False
@@ -111,3 +110,7 @@ class GameState:
             
     def cleanup(self):
         pg.mixer.music.stop()
+        self.background_music.randomize()
+        
+    def entry(self):
+        pg.mixer.music.play()
