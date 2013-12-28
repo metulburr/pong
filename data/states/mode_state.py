@@ -3,18 +3,18 @@
 import pygame as pg
 from ..sound import Sound
 
-class MenuState:
+class ModeState:
     def __init__(self, screen_rect):
         self.screen_rect = screen_rect
-        self.options = ['Play', 'Controls', 'Quit']
-        self.next_list = ['MODE', 'CONTROLS']
-        self.title, self.title_rect = self.make_text('Pong', (75,75,75), (self.screen_rect.centerx, 75), 150)
+        self.options = ['Classic', '4 Way (disabled)', 'Blocks (disabled)']
+        self.next_list = ['PLAY', 'MENU', 'MENU']
+        self.title, self.title_rect = self.make_text('Mode', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.text_basic_color = (255,255,255)
         self.text_hover_color = (255,0,0)
         self.text_color = self.text_basic_color 
         self.done = False
         self.bg_color = (25,25,25)
-        #self.next = "PLAY"
+        self.next = "PLAY"
         self.timer = 0.0
         self.pre_render_options()
         self.from_bottom = 200
@@ -29,6 +29,11 @@ class MenuState:
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
             self.quit = True
+        elif event.type == pg.KEYDOWN:
+            if event.key == pg.K_ESCAPE:
+                self.button_sound.sound.play()
+                self.done = True
+                self.next = 'MENU'
         elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
             for i,opt in enumerate(self.rendered["des"]):
                 if opt[1].collidepoint(pg.mouse.get_pos()):

@@ -3,6 +3,7 @@ import os
 import pygame as pg
 from .states.game_state import GameState
 from .states.menu_state import MenuState
+from .states.mode_state import ModeState
 from .states.controls_state import Controls
 from .sound import Sound, Music
 
@@ -22,9 +23,10 @@ class Control:
         self.keys = pg.key.get_pressed()
         self.done = False
         self.state_dict = {
-            "MENU" : MenuState(self.screen_rect),
-            "PLAY"  : GameState(self.screen_rect),
-            "CONTROLS" : Controls(self.screen_rect)
+            "MENU"     : MenuState(self.screen_rect),
+            "PLAY"     : GameState(self.screen_rect),
+            "CONTROLS" : Controls(self.screen_rect),
+            "MODE"     : ModeState(self.screen_rect)
         }
         self.state_name = "MENU"
         self.state = self.state_dict[self.state_name]
@@ -33,7 +35,7 @@ class Control:
     def event_loop(self):
         for event in pg.event.get():
             if event.type == pg.QUIT:
-                self.done = True
+                self.quit = True
             elif event.type in (pg.KEYDOWN,pg.KEYUP):
                 self.keys = pg.key.get_pressed()
             self.state.get_event(event, self.keys)

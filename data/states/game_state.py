@@ -39,7 +39,6 @@ class GameState:
         self.background_music = Music()
         pg.mixer.music.play()
         
-        
     def reset(self):
         self.pause = False
         self.score = [0,0]
@@ -88,7 +87,6 @@ class GameState:
         self.movement(keys)
         if self.quit:
             return True
-            
 
     def render(self, screen):
         screen.fill(self.bg_color)
