@@ -3,11 +3,11 @@
 import pygame as pg
 from ..sound import Sound
 
-class ModeState:
+class OptionState:
     def __init__(self, screen_rect):
         self.screen_rect = screen_rect
-        self.options = ['Classic', '4 Way (unavailable)', 'Blocks (unavailable)', 'Back']
-        self.next_list = ['PLAY', 'MODE', 'MODE', 'MENU']
+        self.options = ['Controls', 'Back']
+        self.next_list = ['CONTROLS', 'MENU']
         self.title, self.title_rect = self.make_text('Mode', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.text_basic_color = (255,255,255)
         self.text_hover_color = (255,0,0)

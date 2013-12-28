@@ -4,6 +4,7 @@ import pygame as pg
 from .states.game_state import GameState
 from .states.menu_state import MenuState
 from .states.mode_state import ModeState
+from .states.option_state import OptionState
 from .states.controls_state import Controls
 from .sound import Sound, Music
 
@@ -26,7 +27,8 @@ class Control:
             "MENU"     : MenuState(self.screen_rect),
             "PLAY"     : GameState(self.screen_rect),
             "CONTROLS" : Controls(self.screen_rect),
-            "MODE"     : ModeState(self.screen_rect)
+            "MODE"     : ModeState(self.screen_rect),
+            "OPTIONS"  : OptionState(self.screen_rect)
         }
         self.state_name = "MENU"
         self.state = self.state_dict[self.state_name]
