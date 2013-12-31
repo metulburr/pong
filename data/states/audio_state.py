@@ -8,7 +8,7 @@ class AudioState(States):
         self.screen_rect = screen_rect
         self.listings = [
             'Background Music',
-            '+/-'
+            '-/+'
         ]
         self.options = ['Back']
         self.next_list = ['MENU']
@@ -26,15 +26,23 @@ class AudioState(States):
         self.from_bottom_listings = 225
         self.spacer = 25
         self.quit = False
-        self.bg_num()
+        self.bg_music_modify(0)
         
-    def bg_num(self):
-        if self.background_music_volume > 1:
+    def bg_music_modify(self, amount, sound=None):
+        if sound:
+            self.button_sound.sound.play()
+            
+        self.background_music_volume += amount
+        if self.background_music_volume > .9:
             self.background_music_volume = 1.0
-        elif self.background_music_volume < 0:
+            volume_display = 'Max'
+        elif self.background_music_volume < .1:
             self.background_music_volume = 0.0
-        self.bg_music_num, self.bg_music_num_rect = self.make_text('{:.1f}'.format(
-            self.background_music_volume), (75,75,75), (self.screen_rect.centerx + 125, 250), 30)
+            volume_display = 'Mute'
+        else:
+            volume_display = '{:.1f}'.format(self.background_music_volume)
+        self.bg_music_num, self.bg_music_num_rect = self.make_text(
+            volume_display, (75,75,75), (self.screen_rect.centerx + 125, 250), 30)
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
@@ -45,11 +53,9 @@ class AudioState(States):
                 self.done = True
                 self.next = 'MENU'
             elif event.key in [pg.K_PLUS, pg.K_EQUALS]:
-                self.button_sound.sound.play()
-                self.background_music_volume += .1
+                self.bg_music_modify(.1, 'play')
             elif event.key in [pg.K_MINUS, pg.K_UNDERSCORE]:
-                self.button_sound.sound.play()
-                self.background_music_volume -= .1
+                self.bg_music_modify(-.1, 'play')
         elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
             for i,opt in enumerate(self.rendered["des"]):
                 if opt[1].collidepoint(pg.mouse.get_pos()):
@@ -63,7 +69,6 @@ class AudioState(States):
                     break
 
     def update(self, now, keys):
-        self.bg_num()
         pg.mouse.set_visible(True)
         pg.display.set_caption("Pong")
         if self.quit:
