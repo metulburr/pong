@@ -1,15 +1,15 @@
 
 import os
 import pygame as pg
-from .states.game_state import GameState
+from .states.classic_state import ClassicState
 from .states.menu_state import MenuState
 from .states.mode_state import ModeState
 from .states.option_state import OptionState
-from .states.controls_state import Controls
-from .sound import Sound, Music
+from .states.controls_state import ControlsState
+from .states.audio_state import AudioState
 
 
-class Control:
+class Control():
     def __init__(self, fullscreen):
         pg.init()
         self.screensize = (800,600)
@@ -25,10 +25,11 @@ class Control:
         self.done = False
         self.state_dict = {
             "MENU"     : MenuState(self.screen_rect),
-            "PLAY"     : GameState(self.screen_rect),
-            "CONTROLS" : Controls(self.screen_rect),
+            "CLASSIC"  : ClassicState(self.screen_rect),
+            "CONTROLS" : ControlsState(self.screen_rect),
             "MODE"     : ModeState(self.screen_rect),
-            "OPTIONS"  : OptionState(self.screen_rect)
+            "OPTIONS"  : OptionState(self.screen_rect),
+            "AUDIO"    : AudioState(self.screen_rect)
         }
         self.state_name = "MENU"
         self.state = self.state_dict[self.state_name]
@@ -49,6 +50,7 @@ class Control:
             self.state.done = False
             self.state = self.state_dict[self.state_name]
             self.state.entry()
+            
 
     def run(self):
         while not self.done:

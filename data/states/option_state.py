@@ -6,9 +6,9 @@ from ..sound import Sound
 class OptionState:
     def __init__(self, screen_rect):
         self.screen_rect = screen_rect
-        self.options = ['Controls', 'Back']
-        self.next_list = ['CONTROLS', 'MENU']
-        self.title, self.title_rect = self.make_text('Mode', (75,75,75), (self.screen_rect.centerx, 75), 150)
+        self.options = ['Controls', 'Audio', 'Back']
+        self.next_list = ['CONTROLS', 'AUDIO', 'MENU']
+        self.title, self.title_rect = self.make_text('Options', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.text_basic_color = (255,255,255)
         self.text_hover_color = (255,0,0)
         self.text_color = self.text_basic_color 

@@ -1,10 +1,11 @@
 
 
 import pygame as pg
-from ..sound import Sound
+from ..tools import States
 
-class MenuState:
+class MenuState(States):
     def __init__(self, screen_rect):
+        States.__init__(self)
         self.screen_rect = screen_rect
         self.options = ['Play', 'Options', 'Quit']
         self.next_list = ['MODE', 'OPTIONS']
@@ -20,11 +21,6 @@ class MenuState:
         self.from_bottom = 200
         self.spacer = 75
         self.quit = False
-        self.sound_init()
-        
-    def sound_init(self):
-        self.button_sound = Sound('button.wav')
-        self.button_sound.sound.set_volume(.1)
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
@@ -37,6 +33,7 @@ class MenuState:
                     else:
                         self.button_sound.sound.play()
                         self.next = self.next_list[i]
+                        #self.menu_selections.append(self.next_list[i])
                         self.done = True
                     break
 
@@ -82,4 +79,4 @@ class MenuState:
         pass
         
     def entry(self):
-        pass
+        pass#self.menu_selections = []

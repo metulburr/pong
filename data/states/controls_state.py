@@ -1,25 +1,26 @@
 
 import pygame as pg
-from ..sound import Sound
+from ..tools import States
 
-class Controls:
+class ControlsState(States):
     def __init__(self, screen_rect):
+        States.__init__(self)
         self.screen_rect = screen_rect
         self.listings = [
-            'W = Left Paddle move up', 
+            'W = Left Paddle move up',
             'S = Left Paddle move down',
             'Up Arrow = Right Paddle move up',
             'Down Arrow = Right Paddle move down',
             'Esc = go to main menu']
         self.options = ['Back']
         self.next_list = ['MENU']
-        self.title, self.title_rect = self.make_text('Controls', (75,75,75), (self.screen_rect.centerx, 75), 70)
+        self.title, self.title_rect = self.make_text('Controls', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.text_basic_color = (255,255,255)
         self.text_hover_color = (255,0,0)
         self.text_color = self.text_basic_color 
         self.done = False
         self.bg_color = (25,25,25)
-        self.next = "PLAY"
+        #self.next = "PLAY"
         self.timer = 0.0
         self.pre_render_options()
         self.pre_render_listings()
@@ -27,13 +28,8 @@ class Controls:
         self.from_bottom_listings = 225
         self.spacer = 25
         self.quit = False
-        self.sound_init()
         self.movement_image = pg.image.load('resources/graphics/movement.png').convert_alpha()
         self.movement_image_rect = self.movement_image.get_rect(center=(self.screen_rect.centerx, 150))
-        
-    def sound_init(self):
-        self.button_sound = Sound('button.wav')
-        self.button_sound.sound.set_volume(.1)
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
@@ -51,6 +47,7 @@ class Controls:
                     else:
                         self.button_sound.sound.play()
                         self.next = self.next_list[i]
+                        #self.menu_selections.append(self.next_list[i])
                         self.done = True
                     break
 

@@ -2,17 +2,18 @@
 import pygame as pg
 from ..ball import Ball
 from ..paddle import Paddle
-from ..sound import Sound, Music
+from ..tools import States
 
-class GameState:
-    def __init__(self, screen_rect):
+class ClassicState(States):
+    def __init__(self, screen_rect): 
+        States.__init__(self)
         self.screen_rect = screen_rect
         self.score_text, self.score_rect = self.make_text("SCOREBOARD_PLACEHOLDER",
             (255,255,255), (screen_rect.centerx,100), 50)
         self.pause_text, self.pause_rect = self.make_text("PAUSED",
             (255,255,255), screen_rect.center, 50)
         self.done = False
-        self.next = "MENU"
+        #self.next = "MENU"
         self.timer = 0.0
         self.quit = False
         
@@ -31,13 +32,6 @@ class GameState:
         self.paddle_left = Paddle(padding,paddle_y, paddle_width,paddle_height, (150,150,150))
         self.paddle_right = Paddle(pad_right,paddle_y, paddle_width,paddle_height, (150,150,150))
         
-        self.sound_init()
-        
-    def sound_init(self):
-        self.button_sound = Sound('button.wav')
-        self.button_sound.sound.set_volume(.1)
-        self.background_music = Music()
-        
     def reset(self):
         self.pause = False
         self.score = [0,0]
@@ -51,6 +45,7 @@ class GameState:
                 self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
+                #self.menu_selections.append('test')
                 self.reset()
             elif event.key == pg.K_p:
                 self.pause = not self.pause
@@ -110,7 +105,7 @@ class GameState:
             
     def cleanup(self):
         pg.mixer.music.stop()
-        self.background_music.init()
+        self.background_music.setup(self.background_music_volume)
         
     def entry(self):
         pg.mixer.music.play()
