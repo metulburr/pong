@@ -29,8 +29,6 @@ class AudioState(States):
         self.bg_music_modify(0)
         
     def bg_music_modify(self, amount, sound=None):
-        if sound:
-            self.button_sound.sound.play()
             
         self.background_music_volume += amount
         if self.background_music_volume > .9:
@@ -40,6 +38,8 @@ class AudioState(States):
             self.background_music_volume = 0.0
             volume_display = 'Mute'
         else:
+            if sound:
+                self.button_sound.sound.play()
             volume_display = '{:.1f}'.format(self.background_music_volume)
         self.bg_music_num, self.bg_music_num_rect = self.make_text(
             volume_display, (75,75,75), (self.screen_rect.centerx + 125, 250), 30)
