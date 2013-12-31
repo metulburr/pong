@@ -7,8 +7,8 @@ class ModeState(States):
     def __init__(self, screen_rect):
         States.__init__(self)
         self.screen_rect = screen_rect
-        self.options = ['Classic', 'Back']
-        self.next_list = ['CLASSIC', 'MENU']
+        self.options = ['Classic', 'Balls', 'Back']
+        self.next_list = ['CLASSIC', 'BALLS', 'MENU']
         self.title, self.title_rect = self.make_text('Mode', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.pre_render_options()
         self.from_bottom = 200
@@ -30,7 +30,6 @@ class ModeState(States):
                     else:
                         self.button_sound.sound.play()
                         self.next = self.next_list[i]
-                        #self.menu_selections.append(self.next_list[i])
                         self.done = True
                     break
 

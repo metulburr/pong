@@ -4,6 +4,7 @@ from ..ball import Ball
 from ..paddle import Paddle
 from ..tools import States
 from ..AI import AIPaddle
+import random
 
 class ClassicState(States):
     def __init__(self, screen_rect): 
@@ -77,7 +78,6 @@ class ClassicState(States):
         else:
             self.pause_text, self.pause_rect = self.make_text("PAUSED",
                 (255,255,255), self.screen_rect.center, 50)
-        #pg.display.set_caption('Ball speed: {}'.format(self.ball.speed))
         pg.mouse.set_visible(False)
         self.movement(keys)
         if self.quit:

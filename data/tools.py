@@ -21,3 +21,7 @@ class States:
         self.text_basic_color = (255,255,255)
         self.text_hover_color = (255,0,0)
         self.text_color = self.text_basic_color 
+        
+        self.fake_balls = []
+        self.is_fake_balls = False
+        self.fake_ball_count = 10
