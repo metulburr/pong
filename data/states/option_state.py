@@ -2,29 +2,18 @@
 
 import pygame as pg
 from ..sound import Sound
+from ..tools import States
 
-class OptionState:
+class OptionState(States):
     def __init__(self, screen_rect):
+        States.__init__(self)
         self.screen_rect = screen_rect
         self.options = ['Controls', 'Audio', 'Back']
         self.next_list = ['CONTROLS', 'AUDIO', 'MENU']
         self.title, self.title_rect = self.make_text('Options', (75,75,75), (self.screen_rect.centerx, 75), 150)
-        self.text_basic_color = (255,255,255)
-        self.text_hover_color = (255,0,0)
-        self.text_color = self.text_basic_color 
-        self.done = False
-        self.bg_color = (25,25,25)
-        self.next = "PLAY"
-        self.timer = 0.0
         self.pre_render_options()
         self.from_bottom = 200
         self.spacer = 75
-        self.quit = False
-        self.sound_init()
-        
-    def sound_init(self):
-        self.button_sound = Sound('button.wav')
-        self.button_sound.sound.set_volume(.1)
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:

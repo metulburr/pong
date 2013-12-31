@@ -13,19 +13,11 @@ class AudioState(States):
         self.options = ['Back']
         self.next_list = ['MENU']
         self.title, self.title_rect = self.make_text('Audio', (75,75,75), (self.screen_rect.centerx, 75), 150)
-        self.text_basic_color = (255,255,255)
-        self.text_hover_color = (255,0,0)
-        self.text_color = self.text_basic_color 
-        self.done = False
-        self.bg_color = (25,25,25)
-        #self.next = "PLAY"
-        self.timer = 0.0
         self.pre_render_options()
         self.pre_render_listings()
         self.from_bottom = 400
         self.from_bottom_listings = 225
         self.spacer = 25
-        self.quit = False
         self.bg_music_modify(0)
         
     def bg_music_modify(self, amount, sound=None):

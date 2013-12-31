@@ -13,10 +13,6 @@ class ClassicState(States):
             (255,255,255), (screen_rect.centerx,100), 50)
         self.pause_text, self.pause_rect = self.make_text("PAUSED",
             (255,255,255), screen_rect.center, 50)
-        self.done = False
-        #self.next = "MENU"
-        self.timer = 0.0
-        self.quit = False
         
         #game specific content
         self.bg_color = (0,0,0)
@@ -81,7 +77,7 @@ class ClassicState(States):
         else:
             self.pause_text, self.pause_rect = self.make_text("PAUSED",
                 (255,255,255), self.screen_rect.center, 50)
-        pg.display.set_caption('Ball speed: {}'.format(self.ball.speed))
+        #pg.display.set_caption('Ball speed: {}'.format(self.ball.speed))
         pg.mouse.set_visible(False)
         self.movement(keys)
         if self.quit:

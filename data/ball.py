@@ -4,7 +4,8 @@ import random
 from .sound import Sound
 
 class Ball:
-    def __init__(self, screen_rect, width, height, color=(255,255,255)):
+    def __init__(self, screen_rect, width, height, color=(255,255,255), menu=False):
+        self.menu = menu
         self.width = width
         self.height = height
         self.screen_rect = screen_rect
@@ -47,16 +48,24 @@ class Ball:
         
     def collide_walls(self):
         if self.rect.x < 0:
-            self.gutter.sound.play()
-            self.set_ball()
-            return -1
+            if not self.menu:
+                self.gutter.sound.play()
+                self.set_ball()
+                return -1
         elif self.rect.x > self.screen_rect.right:
-            self.gutter.sound.play()
-            self.set_ball()
-            return 1
+            if not self.menu:
+                self.gutter.sound.play()
+                self.set_ball()
+                return 1
+            
         if self.rect.y < 0 or self.rect.y > self.screen_rect.bottom - self.height:
-            self.bounce.sound.play()
+            if not self.menu:
+                self.bounce.sound.play()
             self.vel[1] *= -1;
+            
+        if self.menu:
+            if self.rect.x < 0 or self.rect.x > self.screen_rect.right- self.height:
+                self.vel[0] *= -1;
         return 0
             
     def collide_paddle(self, paddle_left_rect, paddle_right_rect):
