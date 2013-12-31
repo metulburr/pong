@@ -7,7 +7,7 @@ class ModeState(States):
     def __init__(self, screen_rect):
         States.__init__(self)
         self.screen_rect = screen_rect
-        self.options = ['Classic', 'Balls', 'Back']
+        self.options = ['Classic', 'Ghosts', 'Back']
         self.next_list = ['CLASSIC', 'BALLS', 'MENU']
         self.title, self.title_rect = self.make_text('Mode', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.pre_render_options()

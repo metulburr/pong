@@ -45,7 +45,6 @@ class ClassicState(States):
                 self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
-                #self.menu_selections.append('test')
                 self.reset()
             elif event.key == pg.K_p:
                 self.pause = not self.pause
@@ -66,7 +65,7 @@ class ClassicState(States):
             self.paddle_right.move(0, 1)
         
     def update(self, now, keys):
-        self.ai.update(self.ball.rect, self.paddle_left.rect)
+        self.ai.update(self.ball.rect, self.ball, self.paddle_left.rect)
         if not self.pause:
             self.score_text, self.score_rect = self.make_text('{}:{}'.format(self.score[0], self.score[1]),
                 (255,255,255), (self.screen_rect.centerx,25), 50)

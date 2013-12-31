@@ -57,7 +57,6 @@ class AudioState(States):
                     else:
                         self.button_sound.sound.play()
                         self.next = self.next_list[i]
-                        #self.menu_selections.append(self.next_list[i])
                         self.done = True
                     break
 

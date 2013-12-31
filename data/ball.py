@@ -20,6 +20,7 @@ class Ball:
         self.switch_speed = 5
         self.set_ball()
         self.sound_init()
+        self.moving_away_from_AI = False
         
     def sound_init(self):
         self.bounce = Sound('boing.wav')
@@ -69,7 +70,13 @@ class Ball:
         return 0
             
     def collide_paddle(self, paddle_left_rect, paddle_right_rect):
-        if self.rect.colliderect(paddle_left_rect) or self.rect.colliderect(paddle_right_rect):
+        if self.rect.colliderect(paddle_left_rect):
+            self.moving_away_from_AI = True
+            self.vel[0] *= -1;
+            self.bounce.sound.play()
+            self.speed_incr += 1
+        elif self.rect.colliderect(paddle_right_rect):
+            self.moving_away_from_AI = False
             self.vel[0] *= -1;
             self.bounce.sound.play()
             self.speed_incr += 1

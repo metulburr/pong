@@ -4,13 +4,10 @@ from ..ball import Ball
 import random
 import pygame as pg
 
-class BallsState(ClassicState):
+class GhostState(ClassicState):
     def __init__(self, screen_rect):
         ClassicState.__init__(self, screen_rect)
-        for i in range(self.fake_ball_count):
-            color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
-            ball = Ball(self.screen_rect, 10,10, color, menu=True)
-            self.fake_balls.append(ball)
+        self.create_fake_balls()
             
     def render(self, screen):
         screen.fill(self.bg_color)
@@ -43,3 +40,4 @@ class BallsState(ClassicState):
         if self.quit:
             return True
         self.ai.reset()
+        

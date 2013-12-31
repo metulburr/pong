@@ -20,12 +20,14 @@ class AIPaddle:
         surf = pg.Surface([self.screen_rect.width / num, self.screen_rect.height])
         self.screen_response_area_rect = surf.get_rect()
         
-    def update(self, ball_rect, paddle_rect):
+    def update(self, ball_rect, ball, paddle_rect):
         if self.screen_response_area_rect.colliderect(ball_rect):
-            if ball_rect.y < paddle_rect.y:
-                self.move_up = True
-            elif ball_rect.y > paddle_rect.y:
-                self.move_down = True
+            if ball_rect.centery < paddle_rect.centery:
+                if not ball.moving_away_from_AI:
+                    self.move_up = True
+            elif ball_rect.centery > paddle_rect.centery:
+                if not ball.moving_away_from_AI:
+                    self.move_down = True
             
     def reset(self):
         '''reset upon each iteration of update'''
