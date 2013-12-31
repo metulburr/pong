@@ -43,6 +43,7 @@ class AudioState(States):
             volume_display = '{:.1f}'.format(self.background_music_volume)
         self.bg_music_num, self.bg_music_num_rect = self.make_text(
             volume_display, (75,75,75), (self.screen_rect.centerx + 125, 250), 30)
+        self.background_music.setup(self.background_music_volume)
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
