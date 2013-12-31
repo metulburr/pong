@@ -12,6 +12,7 @@ from .states.audio_state import AudioState
 class Control():
     def __init__(self, fullscreen):
         pg.init()
+        pg.display.set_caption("Pong")
         self.screensize = (800,600)
         if fullscreen:
             self.screen = pg.display.set_mode(self.screensize, pg.FULLSCREEN)

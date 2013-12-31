@@ -47,7 +47,6 @@ class OptionState:
 
     def update(self, now, keys):
         pg.mouse.set_visible(True)
-        pg.display.set_caption("2 Player Pong")
         if self.quit:
             return True
 

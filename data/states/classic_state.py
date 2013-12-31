@@ -3,6 +3,7 @@ import pygame as pg
 from ..ball import Ball
 from ..paddle import Paddle
 from ..tools import States
+from ..AI import AIPaddle
 
 class ClassicState(States):
     def __init__(self, screen_rect): 
@@ -32,6 +33,8 @@ class ClassicState(States):
         self.paddle_left = Paddle(padding,paddle_y, paddle_width,paddle_height, (150,150,150))
         self.paddle_right = Paddle(pad_right,paddle_y, paddle_width,paddle_height, (150,150,150))
         
+        self.ai = AIPaddle(self.screen_rect, self.ball.rect)
+        
     def reset(self):
         self.pause = False
         self.score = [0,0]
@@ -55,16 +58,18 @@ class ClassicState(States):
             pg.mixer.music.play()
                     
     def movement(self, keys):
-        if keys[pg.K_w]:
+        if self.ai.move_up:
             self.paddle_left.move(0, -1)
-        if keys[pg.K_s]:
+        if self.ai.move_down:
             self.paddle_left.move(0, 1)
+            
         if keys[pg.K_UP]:
             self.paddle_right.move(0, -1)
         if keys[pg.K_DOWN]:
             self.paddle_right.move(0, 1)
         
     def update(self, now, keys):
+        self.ai.update(self.ball.rect, self.paddle_left.rect)
         if not self.pause:
             self.score_text, self.score_rect = self.make_text('{}:{}'.format(self.score[0], self.score[1]),
                 (255,255,255), (self.screen_rect.centerx,25), 50)
@@ -81,6 +86,7 @@ class ClassicState(States):
         self.movement(keys)
         if self.quit:
             return True
+        self.ai.reset()
 
     def render(self, screen):
         screen.fill(self.bg_color)
