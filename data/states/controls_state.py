@@ -7,8 +7,8 @@ class ControlsState(States):
         States.__init__(self)
         self.screen_rect = screen_rect
         self.listings = [
-            'W = Left Paddle move up',
-            'S = Left Paddle move down',
+            #'W = Left Paddle move up',
+            #'S = Left Paddle move down',
             'Up Arrow = Right Paddle move up',
             'Down Arrow = Right Paddle move down',
             'Esc = go to main menu']
