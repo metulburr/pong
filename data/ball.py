@@ -39,8 +39,11 @@ class Ball:
         
         
     def set_ball(self):
-        #self.vel = [random.choice([-1, 1]), random.choice([-1, 1])]
-        self.vel = [self.get_random_float(), self.get_random_float()]
+        x = self.get_random_float()
+        y = self.get_random_float()
+        if x < 0:
+            self.moving_away_from_AI = False
+        self.vel = [x, y]
         self.rect.center = self.center_screen
         self.true_pos = list(self.rect.center)
         
