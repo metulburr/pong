@@ -8,7 +8,6 @@ from .states.option_state import OptionState
 from .states.controls_state import ControlsState
 from .states.audio_state import AudioState
 from .states.ghost_state import GhostState
-from .states.settings_state import SettingsState
 
 
 class Control():
@@ -34,7 +33,6 @@ class Control():
             "OPTIONS"  : OptionState(self.screen_rect),
             "AUDIO"    : AudioState(self.screen_rect),
             "BALLS"    : GhostState(self.screen_rect),
-            "SETTINGS" : SettingsState(self.screen_rect)
         }
         self.state_name = "MENU"
         self.state = self.state_dict[self.state_name]

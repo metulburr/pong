@@ -7,7 +7,21 @@ import pygame as pg
 class GhostState(ClassicState):
     def __init__(self, screen_rect):
         ClassicState.__init__(self, screen_rect)
-        self.create_fake_balls()
+        self.fake_balls = []
+        #self.create_fake_balls()
+        
+    def add_fake_ball(self):
+        color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
+        ball = Ball(self.screen_rect, 10,10, color, menu=True)
+        self.fake_balls.append(ball)
+        
+    def adjust_score(self, hit_side):
+        if hit_side == -1:
+            self.add_fake_ball()
+            self.score[1] += 1
+        elif hit_side == 1:
+            self.add_fake_ball()
+            self.score[0] += 1
             
     def render(self, screen):
         screen.fill(self.bg_color)
@@ -40,4 +54,9 @@ class GhostState(ClassicState):
         if self.quit:
             return True
         self.ai.reset()
+        
+    def cleanup(self):
+        pg.mixer.music.stop()
+        self.background_music.setup(self.background_music_volume)
+        self.fake_balls = []
         

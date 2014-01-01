@@ -1,9 +1,9 @@
 
 
 from .sound import Sound, Music
-from .ball import Ball
+#from .ball import Ball
 import pygame as pg
-import random
+#import random
 
 class States:
     def __init__(self):
@@ -22,11 +22,3 @@ class States:
         self.text_basic_color = (255,255,255)
         self.text_hover_color = (255,0,0)
         self.text_color = self.text_basic_color 
-        
-        self.fake_ball_count = 5
-    def create_fake_balls(self):
-        self.fake_balls = []
-        for i in range(self.fake_ball_count):
-            color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
-            ball = Ball(self.screen_rect, 10,10, color, menu=True)
-            self.fake_balls.append(ball)

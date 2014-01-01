@@ -8,8 +8,8 @@ class OptionState(States):
     def __init__(self, screen_rect):
         States.__init__(self)
         self.screen_rect = screen_rect
-        self.options = ['Controls', 'Audio', 'Settings', 'Back']
-        self.next_list = ['CONTROLS', 'AUDIO', 'SETTINGS', 'MENU']
+        self.options = ['Controls', 'Audio', 'Back']
+        self.next_list = ['CONTROLS', 'AUDIO', 'MENU']
         self.title, self.title_rect = self.make_text('Options', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.pre_render_options()
         self.from_bottom = 200
