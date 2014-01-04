@@ -9,9 +9,11 @@ class ControlsState(States):
         self.listings = [
             #'W = Left Paddle move up',
             #'S = Left Paddle move down',
-            'Up Arrow = Right Paddle move up',
-            'Down Arrow = Right Paddle move down',
-            'Esc = go to main menu']
+            'Up Arrow = Right paddle move up',
+            'Down Arrow = Right paddle move down',
+            'Esc = Go to main menu',
+            'P = Pause game'
+        ]
         self.options = ['Back']
         self.next_list = ['MENU']
         self.title, self.title_rect = self.make_text('Controls', (75,75,75), (self.screen_rect.centerx, 75), 150)
