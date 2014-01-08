@@ -1,15 +1,7 @@
 
 import os
 import pygame as pg
-from .states.classic_state import ClassicState
-from .states.menu_state import MenuState
-from .states.mode_state import ModeState
-from .states.option_state import OptionState
-from .states.controls_state import ControlsState
-from .states.audio_state import AudioState
-from .states.ghost_state import GhostState
-from .states.splash_state import SplashState
-
+from .states import classic, menu, mode, options, controls, audio, ghost, splash
 
 class Control():
     def __init__(self, fullscreen):
@@ -27,14 +19,14 @@ class Control():
         self.keys = pg.key.get_pressed()
         self.done = False
         self.state_dict = {
-            "MENU"     : MenuState(self.screen_rect),
-            "CLASSIC"  : ClassicState(self.screen_rect),
-            "CONTROLS" : ControlsState(self.screen_rect),
-            "MODE"     : ModeState(self.screen_rect),
-            "OPTIONS"  : OptionState(self.screen_rect),
-            "AUDIO"    : AudioState(self.screen_rect),
-            "BALLS"    : GhostState(self.screen_rect),
-            "SPLASH"   : SplashState(self.screen_rect)
+            "MENU"     : menu.Menu(self.screen_rect),
+            "CLASSIC"  : classic.Classic(self.screen_rect),
+            "CONTROLS" : controls.Controls(self.screen_rect),
+            "MODE"     : mode.Mode(self.screen_rect),
+            "OPTIONS"  : options.Options(self.screen_rect),
+            "AUDIO"    : audio.Audio(self.screen_rect),
+            "BALLS"    : ghost.Ghost(self.screen_rect),
+            "SPLASH"   : splash.Splash(self.screen_rect)
         }
         self.state_name = "SPLASH"
         self.state = self.state_dict[self.state_name]

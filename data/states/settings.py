@@ -1,10 +1,10 @@
 
 import pygame as pg
-from ..tools import States
+from .. import tools
 
-class SettingsState(States):
+class Settings(tools.States):
     def __init__(self, screen_rect):
-        States.__init__(self)
+        tools.States.__init__(self)
         self.screen_rect = screen_rect
         self.listings = [
             'Ghost Ball Count',

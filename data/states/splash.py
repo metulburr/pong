@@ -1,10 +1,10 @@
 
 import pygame as pg
-from ..tools import States
+from .. import tools
 
-class SplashState(States):
+class Splash(tools.States):
     def __init__(self, screen_rect):
-        States.__init__(self)
+        tools.States.__init__(self)
         self.screen_rect = screen_rect
         self.next = "MENU"
         self.timeout = 3
@@ -35,7 +35,6 @@ class SplashState(States):
         self.current_time = pg.time.get_ticks()
         self.cover.set_alpha(self.cover_alpha)
         self.cover_alpha = max(self.cover_alpha-self.alpha_step,0)
-        print(self.cover_alpha)
         if self.current_time-self.start_time > 1000.0*self.timeout:
             self.done = True
         elif self.quit:

@@ -1,18 +1,17 @@
 
-from .classic_state import ClassicState
-from ..ball import Ball
+from . import classic
+from .. import ball as ball_
 import random
 import pygame as pg
 
-class GhostState(ClassicState):
+class Ghost(classic.Classic):
     def __init__(self, screen_rect):
-        ClassicState.__init__(self, screen_rect)
+        classic.Classic.__init__(self, screen_rect)
         self.fake_balls = []
-        #self.create_fake_balls()
         
     def add_fake_ball(self):
         color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
-        ball = Ball(self.screen_rect, 10,10, color, menu=True)
+        ball = ball_.Ball(self.screen_rect, 10,10, color, menu=True)
         self.fake_balls.append(ball)
         
     def adjust_score(self, hit_side):

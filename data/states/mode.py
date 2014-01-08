@@ -1,41 +1,18 @@
 
-import pygame as pg
-from ..tools import States
 
-class AudioState(States):
+import pygame as pg
+from .. import tools
+
+class Mode(tools.States):
     def __init__(self, screen_rect):
-        States.__init__(self)
+        tools.States.__init__(self)
         self.screen_rect = screen_rect
-        self.listings = [
-            'Background Music',
-            '-/+'
-        ]
-        self.options = ['Back']
-        self.next_list = ['MENU']
-        self.title, self.title_rect = self.make_text('Audio', (75,75,75), (self.screen_rect.centerx, 75), 150)
+        self.options = ['Classic', 'Ghosts', 'Back']
+        self.next_list = ['CLASSIC', 'BALLS', 'MENU']
+        self.title, self.title_rect = self.make_text('Mode', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.pre_render_options()
-        self.pre_render_listings()
-        self.from_bottom = 400
-        self.from_bottom_listings = 225
-        self.spacer = 25
-        self.bg_music_modify(0)
-        
-    def bg_music_modify(self, amount, sound=None):
-            
-        self.background_music_volume += amount
-        if self.background_music_volume > .9:
-            self.background_music_volume = 1.0
-            volume_display = 'Max'
-        elif self.background_music_volume < .1:
-            self.background_music_volume = 0.0
-            volume_display = 'Mute'
-        else:
-            if sound:
-                self.button_sound.sound.play()
-            volume_display = '{:.1f}'.format(self.background_music_volume)
-        self.bg_music_num, self.bg_music_num_rect = self.make_text(
-            volume_display, (75,75,75), (self.screen_rect.centerx + 125, 250), 30)
-        self.background_music.setup(self.background_music_volume)
+        self.from_bottom = 200
+        self.spacer = 75
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
@@ -45,10 +22,6 @@ class AudioState(States):
                 self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
-            elif event.key in [pg.K_PLUS, pg.K_EQUALS]:
-                self.bg_music_modify(.1, 'play')
-            elif event.key in [pg.K_MINUS, pg.K_UNDERSCORE]:
-                self.bg_music_modify(-.1, 'play')
         elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
             for i,opt in enumerate(self.rendered["des"]):
                 if opt[1].collidepoint(pg.mouse.get_pos()):
@@ -67,8 +40,7 @@ class AudioState(States):
 
     def render(self, screen):
         screen.fill(self.bg_color)
-        screen.blit(self.title, self.title_rect)
-        screen.blit(self.bg_music_num, self.bg_music_num_rect)
+        screen.blit(self.title,self.title_rect)
         for i,opt in enumerate(self.rendered["des"]):
             opt[1].center = (self.screen_rect.centerx, self.from_bottom+i*self.spacer)
             if opt[1].collidepoint(pg.mouse.get_pos()):
@@ -77,24 +49,12 @@ class AudioState(States):
                 screen.blit(rend_img,rend_rect)
             else:
                 screen.blit(opt[0],opt[1])
-        for i,opt in enumerate(self.rendered_listing['des']):
-            opt[1].center = (self.screen_rect.centerx, self.from_bottom_listings + i * self.spacer)
-            screen.blit(opt[0],opt[1])
-                
+        
     def make_text(self,message,color,center,size):
         font = pg.font.Font("resources/fonts/Megadeth.ttf", size)
         text = font.render(message,True,color)
         rect = text.get_rect(center=center)
         return text,rect
-        
-    def pre_render_listings(self):
-        listing_text = pg.font.Font("resources/fonts/impact.ttf",25)
-        rendered_msg = {"des":[],"sel":[]}
-        for listing in self.listings:
-            text = listing_text.render(listing, 1, (255,255,255))
-            text_rect = text.get_rect()
-            rendered_msg["des"].append((text, text_rect))
-        self.rendered_listing = rendered_msg
         
     def pre_render_options(self):
         font_deselect = pg.font.Font("resources/fonts/Megadeth.ttf",50)
@@ -109,7 +69,7 @@ class AudioState(States):
             rendered_msg["des"].append((d_rend,d_rect))
             rendered_msg["sel"].append((s_rend,s_rect))
         self.rendered = rendered_msg
-
+        
     def cleanup(self):
         pass
         

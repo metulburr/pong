@@ -1,14 +1,14 @@
 
 import pygame as pg
-from ..ball import Ball
-from ..paddle import Paddle
-from ..tools import States
-from ..AI import AIPaddle
+from .. import ball as ball_
+from .. import paddle
+from .. import tools
+from .. import AI
 import random
 
-class ClassicState(States):
+class Classic(tools.States):
     def __init__(self, screen_rect): 
-        States.__init__(self)
+        tools.States.__init__(self)
         self.screen_rect = screen_rect
         self.score_text, self.score_rect = self.make_text("SCOREBOARD_PLACEHOLDER",
             (255,255,255), (screen_rect.centerx,100), 50)
@@ -26,11 +26,11 @@ class ClassicState(States):
         padding = 25 #padding from wall
         pad_right = screen_rect.width - paddle_width - padding
         
-        self.ball = Ball(self.screen_rect, 10,10, (0,255,0))
-        self.paddle_left = Paddle(padding,paddle_y, paddle_width,paddle_height, (150,150,150))
-        self.paddle_right = Paddle(pad_right,paddle_y, paddle_width,paddle_height, (150,150,150))
+        self.ball = ball_.Ball(self.screen_rect, 10,10, (0,255,0))
+        self.paddle_left = paddle.Paddle(padding,paddle_y, paddle_width,paddle_height, (150,150,150))
+        self.paddle_right = paddle.Paddle(pad_right,paddle_y, paddle_width,paddle_height, (150,150,150))
         
-        self.ai = AIPaddle(self.screen_rect, self.ball.rect)
+        self.ai = AI.AIPaddle(self.screen_rect, self.ball.rect)
         
     def reset(self):
         self.pause = False
