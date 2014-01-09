@@ -14,6 +14,10 @@ class Classic(tools.States):
             (255,255,255), (screen_rect.centerx,100), 50)
         self.pause_text, self.pause_rect = self.make_text("PAUSED",
             (255,255,255), screen_rect.center, 50)
+            
+        self.cover = pg.Surface((screen_rect.width, screen_rect.height))
+        self.cover.fill(0)
+        self.cover.set_alpha(200)
         
         #game specific content
         self.bg_color = (0,0,0)
@@ -65,8 +69,8 @@ class Classic(tools.States):
             self.paddle_right.move(0, 1)
         
     def update(self, now, keys):
-        self.ai.update(self.ball.rect, self.ball, self.paddle_left.rect)
         if not self.pause:
+            self.ai.update(self.ball.rect, self.ball, self.paddle_left.rect)
             self.score_text, self.score_rect = self.make_text('{}:{}'.format(self.score[0], self.score[1]),
                 (255,255,255), (self.screen_rect.centerx,25), 50)
             self.paddle_left.update(self.screen_rect)
@@ -90,6 +94,7 @@ class Classic(tools.States):
         self.paddle_left.render(screen)
         self.paddle_right.render(screen)
         if self.pause:
+            screen.blit(self.cover,(0,0))
             screen.blit(self.pause_text, self.pause_rect)
         
     def make_text(self,message,color,center,size):

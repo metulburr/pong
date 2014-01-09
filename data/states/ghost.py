@@ -11,7 +11,8 @@ class Ghost(classic.Classic):
         
     def add_fake_ball(self):
         color = (random.randint(0,255), random.randint(0,255), random.randint(0,255))
-        ball = ball_.Ball(self.screen_rect, 10,10, color, menu=True)
+        speed = random.randint(3,10)
+        ball = ball_.Ball(self.screen_rect, 10,10, color, menu=True, speed=speed)
         self.fake_balls.append(ball)
         
     def adjust_score(self, hit_side):
@@ -31,11 +32,12 @@ class Ghost(classic.Classic):
         self.paddle_left.render(screen)
         self.paddle_right.render(screen)
         if self.pause:
+            screen.blit(self.cover,(0,0))
             screen.blit(self.pause_text, self.pause_rect)
             
     def update(self, now, keys):
-        self.ai.update(self.ball.rect, self.ball, self.paddle_left.rect)
         if not self.pause:
+            self.ai.update(self.ball.rect, self.ball, self.paddle_left.rect)
             self.score_text, self.score_rect = self.make_text('{}:{}'.format(self.score[0], self.score[1]),
                 (255,255,255), (self.screen_rect.centerx,25), 50)
             self.paddle_left.update(self.screen_rect)

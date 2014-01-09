@@ -4,7 +4,7 @@ import random
 from .sound import Sound
 
 class Ball:
-    def __init__(self, screen_rect, width, height, color=(255,255,255), menu=False):
+    def __init__(self, screen_rect, width, height, color=(255,255,255), menu=False, speed=3):
         self.menu = menu
         self.width = width
         self.height = height
@@ -14,7 +14,7 @@ class Ball:
         self.center_screen = screen_rect.center
         self.color = color
         self.surface.fill(self.color)
-        self.speed_init = 3
+        self.speed_init = speed
         self.speed = self.speed_init
         self.speed_incr = 0
         self.switch_speed = 5
