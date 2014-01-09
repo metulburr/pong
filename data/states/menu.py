@@ -40,8 +40,6 @@ class Menu(tools.States):
         for ball in self.menu_balls:
             ball.update(self.bogus_rect, self.bogus_rect)
         pg.mouse.set_visible(True)
-        if self.quit:
-            return True
 
     def render(self, screen):
         screen.fill(self.bg_color)

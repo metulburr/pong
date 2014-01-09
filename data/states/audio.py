@@ -62,8 +62,6 @@ class Audio(tools.States):
 
     def update(self, now, keys):
         pg.mouse.set_visible(True)
-        if self.quit:
-            return True
 
     def render(self, screen):
         screen.fill(self.bg_color)

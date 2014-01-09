@@ -37,8 +37,6 @@ class Splash(tools.States):
         self.cover_alpha = max(self.cover_alpha-self.alpha_step,0)
         if self.current_time-self.start_time > 1000.0*self.timeout:
             self.done = True
-        elif self.quit:
-            return True
             
     def render(self, screen):
         screen.blit(self.image, (0,0))

@@ -51,10 +51,12 @@ class Control():
 
     def run(self):
         while not self.done:
+            if self.state.quit:
+                self.done = True
             now = pg.time.get_ticks()
             self.event_loop()
             self.change_state()
-            self.done = self.state.update(now, self.keys)
+            self.state.update(now, self.keys)
             self.state.render(self.screen)
             pg.display.update()
             self.clock.tick(self.fps)

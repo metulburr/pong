@@ -47,13 +47,11 @@ class Ghost(classic.Classic):
                 ball.update(self.bogus_rect, self.bogus_rect)
             if hit_side:
                 self.adjust_score(hit_side)
+            self.movement(keys)
         else:
             self.pause_text, self.pause_rect = self.make_text("PAUSED",
                 (255,255,255), self.screen_rect.center, 50)
         pg.mouse.set_visible(False)
-        self.movement(keys)
-        if self.quit:
-            return True
         self.ai.reset()
         
     def cleanup(self):
