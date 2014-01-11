@@ -25,21 +25,13 @@ class Menu(tools.States):
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
             self.quit = True
-        elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-            for i,opt in enumerate(self.rendered["des"]):
-                if opt[1].collidepoint(pg.mouse.get_pos()):
-                    if i == len(self.next_list):
-                        self.quit = True
-                    else:
-                        self.button_sound.sound.play()
-                        self.next = self.next_list[i]
-                        self.done = True
-                    break
+        self.mouse_menu_click(event)
 
     def update(self, now, keys):
         for ball in self.menu_balls:
             ball.update(self.bogus_rect, self.bogus_rect)
         pg.mouse.set_visible(True)
+        self.mouse_hover_sound()
 
     def render(self, screen):
         screen.fill(self.bg_color)
@@ -54,6 +46,7 @@ class Menu(tools.States):
                 screen.blit(rend_img,rend_rect)
             else:
                 screen.blit(opt[0],opt[1])
+                
         
     def make_text(self,message,color,center,size):
         font = pg.font.Font("resources/fonts/Megadeth.ttf", size)
@@ -79,4 +72,4 @@ class Menu(tools.States):
         pass
         
     def entry(self):
-        pass#self.menu_selections = []
+        pass

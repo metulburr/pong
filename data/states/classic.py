@@ -46,7 +46,7 @@ class Classic(tools.States):
             self.quit = True
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_ESCAPE:
-                self.button_sound.sound.play()
+                #self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
                 self.reset()

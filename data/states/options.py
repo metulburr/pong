@@ -20,22 +20,14 @@ class Options(tools.States):
             self.quit = True
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_ESCAPE:
-                self.button_sound.sound.play()
+                #self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
-        elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-            for i,opt in enumerate(self.rendered["des"]):
-                if opt[1].collidepoint(pg.mouse.get_pos()):
-                    if i == len(self.next_list):
-                        self.quit = True
-                    else:
-                        self.button_sound.sound.play()
-                        self.next = self.next_list[i]
-                        self.done = True
-                    break
+        self.mouse_menu_click(event)
 
     def update(self, now, keys):
         pg.mouse.set_visible(True)
+        self.mouse_hover_sound()
 
     def render(self, screen):
         screen.fill(self.bg_color)
