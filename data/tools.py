@@ -36,6 +36,8 @@ class States:
         self.timer = 0.0
         self.quit = False
         self.done = False
+        self.rendered = None
+        self.next_list = None
         self.last_option = None
         
         self.text_basic_color = (255,255,255)
