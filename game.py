@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 import pygame as pg
 from data.main import main
