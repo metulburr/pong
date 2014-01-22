@@ -70,35 +70,15 @@ class Audio(tools.States):
         for i,opt in enumerate(self.rendered_listing['des']):
             opt[1].center = (self.screen_rect.centerx, self.from_bottom_listings + i * self.spacer)
             screen.blit(opt[0],opt[1])
-                
-    def make_text(self,message,color,center,size):
-        font = pg.font.Font("resources/fonts/Megadeth.ttf", size)
-        text = font.render(message,True,color)
-        rect = text.get_rect(center=center)
-        return text,rect
         
     def pre_render_listings(self):
-        listing_text = pg.font.Font("resources/fonts/impact.ttf",25)
+        listing_text = tools.Font.load('impact.ttf', 25)
         rendered_msg = {"des":[],"sel":[]}
         for listing in self.listings:
             text = listing_text.render(listing, 1, (255,255,255))
             text_rect = text.get_rect()
             rendered_msg["des"].append((text, text_rect))
         self.rendered_listing = rendered_msg
-        
-    def pre_render_options(self):
-        font_deselect = pg.font.Font("resources/fonts/Megadeth.ttf",50)
-        font_selected = pg.font.Font("resources/fonts/Megadeth.ttf",75)
-
-        rendered_msg = {"des":[],"sel":[]}
-        for option in self.options:
-            d_rend = font_deselect.render(option, 1, (255,255,255))
-            d_rect = d_rend.get_rect()
-            s_rend = font_selected.render(option, 1, (255,0,0))
-            s_rect = s_rend.get_rect()
-            rendered_msg["des"].append((d_rend,d_rect))
-            rendered_msg["sel"].append((s_rend,s_rect))
-        self.rendered = rendered_msg
 
     def cleanup(self):
         pass

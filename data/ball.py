@@ -1,7 +1,7 @@
 
 import pygame as pg
 import random
-from .sound import Sound
+from . import tools
 
 class Ball:
     def __init__(self, screen_rect, width, height, color=(255,255,255), menu=False, speed=3):
@@ -23,9 +23,9 @@ class Ball:
         self.moving_away_from_AI = False
         
     def sound_init(self):
-        self.bounce = Sound('boing.wav')
+        self.bounce = tools.Sound('boing.wav')
         self.bounce.sound.set_volume(.5)
-        self.gutter = Sound('whoosh.wav')
+        self.gutter = tools.Sound('whoosh.wav')
         self.gutter.sound.set_volume(.1)
         
     def get_random_float(self):

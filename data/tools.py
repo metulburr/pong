@@ -1,9 +1,9 @@
 
 
-from .sound import Sound, Music
 import pygame as pg
 import os
 import shutil
+import random
 
 def clean_files():
     '''remove all pyc files and __pycache__ direcetories in subdirectory'''
@@ -18,6 +18,45 @@ def clean_files():
                 path = os.path.join(root, name)
                 print('removing {}'.format(os.path.abspath(path)))
                 os.remove(path)
+                    
+class Image:
+    path = 'resources/graphics'
+    @staticmethod
+    def load(filename):
+        p = os.path.join(Image.path, filename)
+        return pg.image.load(os.path.abspath(p))
+
+class Font:
+    path = 'resources/fonts'
+    @staticmethod
+    def load(filename, size):
+        p = os.path.join(Font.path, filename)
+        return pg.font.Font(os.path.abspath(p), size)
+
+class Sound:
+    def __init__(self, filename):
+        self.path = os.path.join('resources', 'sound')
+        self.fullpath = os.path.join(self.path, filename)
+        pg.mixer.init(frequency=22050, size=-16, channels=2, buffer=128)
+        self.sound = pg.mixer.Sound(self.fullpath)
+        
+class Music:
+    def __init__(self, volume):
+        self.path = os.path.join('resources', 'music')
+        self.setup(volume)
+
+        
+    def setup(self, volume):
+        self.track_end = pg.USEREVENT+1
+        self.tracks = []
+        self.track = 0
+        for track in os.listdir(self.path):
+            self.tracks.append(os.path.join(self.path, track))
+        random.shuffle(self.tracks)
+        pg.mixer.music.set_volume(volume)
+        pg.mixer.music.set_endevent(self.track_end)
+        pg.mixer.music.load(self.tracks[0])
+
 
 
 class States:
@@ -72,4 +111,23 @@ class States:
                         self.next = self.next_list[i]
                         self.done = True
                     break
+                    
+    def make_text(self,message,color,center,size):
+        font = Font.load('Megadeth.ttf', size)
+        text = font.render(message,True,color)
+        rect = text.get_rect(center=center)
+        return text,rect
+        
+    def pre_render_options(self):
+        font_deselect = Font.load('Megadeth.ttf', 50)
+        font_selected = Font.load('Megadeth.ttf', 75)
 
+        rendered_msg = {"des":[],"sel":[]}
+        for option in self.options:
+            d_rend = font_deselect.render(option, 1, (255,255,255))
+            d_rect = d_rend.get_rect()
+            s_rend = font_selected.render(option, 1, (255,0,0))
+            s_rect = s_rend.get_rect()
+            rendered_msg["des"].append((d_rend,d_rect))
+            rendered_msg["sel"].append((s_rend,s_rect))
+        self.rendered = rendered_msg

@@ -95,12 +95,6 @@ class Classic(tools.States):
             screen.blit(self.cover,(0,0))
             screen.blit(self.pause_text, self.pause_rect)
         
-    def make_text(self,message,color,center,size):
-        font = pg.font.Font("resources/fonts/impact.ttf", size)
-        text = font.render(message,True,color)
-        rect = text.get_rect(center=center)
-        return text,rect
-        
     def adjust_score(self, hit_side):
         if hit_side == -1:
             self.score[1] += 1

@@ -38,24 +38,10 @@ class GetKey(tools.States):
         screen.blit(self.title,self.title_rect)
         
     def make_text(self,message,color,center,size):
-        font = pg.font.Font("resources/fonts/impact.ttf", size)
+        font = tools.Font.load('impact.ttf', size)
         text = font.render(message,True,color)
         rect = text.get_rect(center=center)
         return text,rect
-        
-    def pre_render_options(self):
-        font_deselect = pg.font.Font("resources/fonts/Megadeth.ttf",50)
-        font_selected = pg.font.Font("resources/fonts/Megadeth.ttf",75)
-
-        rendered_msg = {"des":[],"sel":[]}
-        for option in self.options:
-            d_rend = font_deselect.render(option, 1, (255,255,255))
-            d_rect = d_rend.get_rect()
-            s_rend = font_selected.render(option, 1, (255,0,0))
-            s_rect = s_rend.get_rect()
-            rendered_msg["des"].append((d_rend,d_rect))
-            rendered_msg["sel"].append((s_rend,s_rect))
-        self.rendered = rendered_msg
         
     def cleanup(self):
         pass

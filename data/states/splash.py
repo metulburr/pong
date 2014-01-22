@@ -28,7 +28,7 @@ class Splash(tools.States):
         return rendered_text
 
     def render_font(self,font,size,msg,color=(255,255,255)):
-        selected_font = pg.font.Font('resources/fonts/impact.ttf',size)
+        selected_font = tools.Font.load('impact.ttf', size)
         return selected_font.render(msg,1,color)
 
     def update(self,surface,keys):
