@@ -2,3 +2,5 @@
 #
 http://pygame.org/project-Metulburr%27s+Pong-2875-4679.html
 
+python game.py --help
+

@@ -2,6 +2,6 @@
 
 from .control import Control
 
-def main():
-    app = Control(fullscreen=False)
+def main(fullscreen):
+    app = Control(fullscreen)
     app.run()
