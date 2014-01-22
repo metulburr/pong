@@ -2,48 +2,37 @@
 import pygame as pg
 from .. import tools
 
-class Settings(tools.States):
+class Controls(tools.States):
     def __init__(self, screen_rect):
         tools.States.__init__(self)
         self.screen_rect = screen_rect
         self.listings = [
-            'Ghost Ball Count',
-            '-/+'
+            #'W = Left Paddle move up',
+            #'S = Left Paddle move down',
+            'Up Arrow = Right paddle move up',
+            'Down Arrow = Right paddle move down',
+            'Esc = Go to main menu',
+            'P = Pause game'
         ]
         self.options = ['Back']
         self.next_list = ['MENU']
-        self.title, self.title_rect = self.make_text('Settings', (75,75,75), (self.screen_rect.centerx, 75), 150)
+        self.title, self.title_rect = self.make_text('Controls', (75,75,75), (self.screen_rect.centerx, 75), 150)
         self.pre_render_options()
         self.pre_render_listings()
         self.from_bottom = 400
         self.from_bottom_listings = 225
         self.spacer = 25
-        self.ghost_ball_count_modify(0)
-        
-    def ghost_ball_count_modify(self, amount, sound=None):
-        self.fake_ball_count += amount
-        if self.fake_ball_count < 1:
-            self.fake_ball_count = 1
-        else:
-            if sound:
-                self.button_sound.sound.play()
-            count_display = '{}'.format(self.fake_ball_count)
-            self.ball_count, self.ball_count_rect = self.make_text(
-                count_display, (75,75,75), (self.screen_rect.centerx + 125, 250), 30)
-        self.create_fake_balls()
+        self.movement_image = pg.image.load('resources/graphics/movement.png').convert_alpha()
+        self.movement_image_rect = self.movement_image.get_rect(center=(self.screen_rect.centerx, 150))
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
             self.quit = True
         elif event.type == pg.KEYDOWN:
-            if event.key == self.controller_dict['back']:
+            if event.key == pg.K_ESCAPE:
                 #self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
-            elif event.key in [pg.K_PLUS, pg.K_EQUALS]:
-                self.ghost_ball_count_modify(1, 'play')
-            elif event.key in [pg.K_MINUS, pg.K_UNDERSCORE]:
-                self.ghost_ball_count_modify(-1, 'play')
         self.mouse_menu_click(event)
 
     def update(self, now, keys):
@@ -52,8 +41,8 @@ class Settings(tools.States):
 
     def render(self, screen):
         screen.fill(self.bg_color)
-        screen.blit(self.title, self.title_rect)
-        screen.blit(self.ball_count, self.ball_count_rect)
+        screen.blit(self.title,self.title_rect)
+        screen.blit(self.movement_image, self.movement_image_rect)
         for i,opt in enumerate(self.rendered["des"]):
             opt[1].center = (self.screen_rect.centerx, self.from_bottom+i*self.spacer)
             if opt[1].collidepoint(pg.mouse.get_pos()):

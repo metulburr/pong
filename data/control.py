@@ -1,7 +1,7 @@
 
 import os
 import pygame as pg
-from .states import classic, menu, mode, options, controls, audio, ghost, splash
+from .states import classic, menu, mode, options, controls, audio, ghost, splash, keybinding, getkey
 
 class Control():
     def __init__(self, fullscreen):
@@ -26,7 +26,9 @@ class Control():
             "OPTIONS"  : options.Options(self.screen_rect),
             "AUDIO"    : audio.Audio(self.screen_rect),
             "BALLS"    : ghost.Ghost(self.screen_rect),
-            "SPLASH"   : splash.Splash(self.screen_rect)
+            "SPLASH"   : splash.Splash(self.screen_rect),
+            "KEYBINDING" : keybinding.KeyBinding(self.screen_rect),
+            "GETKEY"   : getkey.GetKey(self.screen_rect)
         }
         self.state_name = "SPLASH"
         self.state = self.state_dict[self.state_name]

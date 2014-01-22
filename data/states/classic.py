@@ -45,12 +45,12 @@ class Classic(tools.States):
         if event.type == pg.QUIT:
             self.quit = True
         elif event.type == pg.KEYDOWN:
-            if event.key == pg.K_ESCAPE:
+            if event.key == self.controller_dict['back']:
                 #self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
                 self.reset()
-            elif event.key == pg.K_p:
+            elif event.key == self.controller_dict['pause']:
                 self.pause = not self.pause
         elif event.type == self.background_music.track_end:
             self.background_music.track = (self.background_music.track+1) % len(self.background_music.tracks)
@@ -63,9 +63,9 @@ class Classic(tools.States):
         if self.ai.move_down:
             self.paddle_left.move(0, 1)
             
-        if keys[pg.K_UP]:
+        if keys[self.controller_dict['up']]:
             self.paddle_right.move(0, -1)
-        if keys[pg.K_DOWN]:
+        if keys[self.controller_dict['down']]:
             self.paddle_right.move(0, 1)
         
     def update(self, now, keys):

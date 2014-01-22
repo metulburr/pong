@@ -18,7 +18,7 @@ class Mode(tools.States):
         if event.type == pg.QUIT:
             self.quit = True
         elif event.type == pg.KEYDOWN:
-            if event.key == pg.K_ESCAPE:
+            if event.key == self.controller_dict['back']:
                 #self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'

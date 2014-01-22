@@ -44,6 +44,16 @@ class States:
         self.text_hover_color = (255,0,0)
         self.text_color = self.text_basic_color 
         
+        self.action = None
+        self.controller_dict = {
+            'up'   : pg.K_UP,
+            'down' : pg.K_DOWN,
+            'pause': pg.K_p,
+            'back' : pg.K_ESCAPE
+        }
+    def update_controller_dict(self, keyname, event):
+        self.controller_dict[keyname] = event.key
+        
     def mouse_hover_sound(self):
         for i,opt in enumerate(self.rendered["des"]):
             if opt[1].collidepoint(pg.mouse.get_pos()):
