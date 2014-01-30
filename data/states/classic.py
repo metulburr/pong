@@ -63,9 +63,12 @@ class Classic(tools.States):
         if self.ai.move_down:
             self.paddle_left.move(0, 1)
             
-        if keys[self.controller_dict['up']]:
+        #temp fix for keys until prefecting key bindings
+        #if keys[self.controller_dict['up']]:
+        if keys[pg.K_UP] or keys[pg.K_w]:
             self.paddle_right.move(0, -1)
-        if keys[self.controller_dict['down']]:
+        #if keys[self.controller_dict['down']]:
+        if keys[pg.K_DOWN] or keys[pg.K_s]:
             self.paddle_right.move(0, 1)
         
     def update(self, now, keys):
