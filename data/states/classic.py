@@ -7,7 +7,7 @@ from .. import AI
 import random
 
 class Classic(tools.States):
-    def __init__(self, screen_rect): 
+    def __init__(self, screen_rect, difficulty): 
         tools.States.__init__(self)
         self.screen_rect = screen_rect
         self.score_text, self.score_rect = self.make_text("SCOREBOARD_PLACEHOLDER",
@@ -34,7 +34,7 @@ class Classic(tools.States):
         self.paddle_left = paddle.Paddle(padding,paddle_y, paddle_width,paddle_height, (150,150,150))
         self.paddle_right = paddle.Paddle(pad_right,paddle_y, paddle_width,paddle_height, (150,150,150))
         
-        self.ai = AI.AIPaddle(self.screen_rect, self.ball.rect)
+        self.ai = AI.AIPaddle(self.screen_rect, self.ball.rect, difficulty)
         
     def reset(self):
         self.pause = False

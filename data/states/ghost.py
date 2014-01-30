@@ -5,8 +5,8 @@ import random
 import pygame as pg
 
 class Ghost(classic.Classic):
-    def __init__(self, screen_rect):
-        classic.Classic.__init__(self, screen_rect)
+    def __init__(self, screen_rect, difficulty):
+        classic.Classic.__init__(self, screen_rect, difficulty)
         self.fake_balls = []
         
     def add_fake_ball(self):

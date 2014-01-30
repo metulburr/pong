@@ -2,8 +2,8 @@
 import pygame as pg
 
 class AIPaddle:
-    def __init__(self, screen_rect, ball_rect):
-        self.difficulty = 'medium'
+    def __init__(self, screen_rect, ball_rect, difficulty):
+        self.difficulty = difficulty
         self.screen_rect = screen_rect
         self.ball_Rect = ball_rect
         self.move_up = False
