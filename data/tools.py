@@ -83,6 +83,8 @@ class States:
         self.text_hover_color = (255,0,0)
         self.text_color = self.text_basic_color 
         
+        self.selected_index = 0
+        
         self.action = None
         self.controller_dict = {
             'up'   : pg.K_UP,
@@ -104,12 +106,8 @@ class States:
         if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
             for i,opt in enumerate(self.rendered["des"]):
                 if opt[1].collidepoint(pg.mouse.get_pos()):
-                    if i == len(self.next_list):
-                        self.quit = True
-                    else:
-                        #self.button_sound.sound.play()
-                        self.next = self.next_list[i]
-                        self.done = True
+                    self.selected_index = i
+                    self.select_option(i)
                     break
                     
     def make_text(self,message,color,center,size):
@@ -131,3 +129,28 @@ class States:
             rendered_msg["des"].append((d_rend,d_rect))
             rendered_msg["sel"].append((s_rend,s_rect))
         self.rendered = rendered_msg
+        
+    def select_option(self, i):
+        '''select menu option via keys or mouse'''
+        if i == len(self.next_list):
+            self.quit = True
+        else:
+            self.button_sound.sound.play()
+            self.next = self.next_list[i]
+            self.done = True
+            self.selected_index = 0
+
+    def change_selected_option(self, op=0):
+        '''change highlighted menu option'''
+        for i,opt in enumerate(self.rendered["des"]):
+            if opt[1].collidepoint(pg.mouse.get_pos()):
+                self.selected_index = i
+
+        if op:
+            self.selected_index += op
+            max_ind = len(self.rendered['des'])-1
+            if self.selected_index < 0:
+                self.selected_index = max_ind
+            elif self.selected_index > max_ind:
+                self.selected_index = 0
+            self.button_hover.sound.play()

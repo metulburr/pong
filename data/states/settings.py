@@ -36,7 +36,13 @@ class Settings(tools.States):
         if event.type == pg.QUIT:
             self.quit = True
         elif event.type == pg.KEYDOWN:
-            if event.key == self.controller_dict['back']:
+            if event.key in [pg.K_UP, pg.K_w]:
+                self.change_selected_option(-1)
+            elif event.key in [pg.K_DOWN, pg.K_s]:
+                self.change_selected_option(1)
+            elif event.key == pg.K_RETURN:
+                self.select_option(self.selected_index)
+            elif event.key == self.controller_dict['back']:
                 #self.button_sound.sound.play()
                 self.done = True
                 self.next = 'MENU'
@@ -49,6 +55,7 @@ class Settings(tools.States):
     def update(self, now, keys):
         pg.mouse.set_visible(True)
         self.mouse_hover_sound()
+        self.change_selected_option()
 
     def render(self, screen):
         screen.fill(self.bg_color)
@@ -56,7 +63,7 @@ class Settings(tools.States):
         screen.blit(self.ball_count, self.ball_count_rect)
         for i,opt in enumerate(self.rendered["des"]):
             opt[1].center = (self.screen_rect.centerx, self.from_bottom+i*self.spacer)
-            if opt[1].collidepoint(pg.mouse.get_pos()):
+            if i == self.selected_index:
                 rend_img,rend_rect = self.rendered["sel"][i]
                 rend_rect.center = opt[1].center
                 screen.blit(rend_img,rend_rect)
