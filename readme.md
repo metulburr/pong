@@ -3,5 +3,7 @@
 http://pygame.org/project-Metulburr%27s+Pong-2875-4679.html
 
 ###list arguments
-
     python game.py --help
+
+###Notes
+The exe compilation is not updated as much as the code
