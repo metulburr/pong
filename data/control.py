@@ -4,10 +4,11 @@ import pygame as pg
 from .states import classic, menu, mode, options, controls, audio, ghost, splash, keybinding, getkey
 
 class Control():
-    def __init__(self, fullscreen, difficulty):
+    def __init__(self, fullscreen, difficulty, size):
         pg.init()
         pg.display.set_caption("Pong")
-        self.screensize = (800,600)
+        self.screensize = (int(size.split('x')[0]), int(size.split('x')[1]))
+        #self.screensize = (800,600)
         if fullscreen:
             self.screen = pg.display.set_mode(self.screensize, pg.FULLSCREEN)
         else:

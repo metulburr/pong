@@ -12,23 +12,29 @@ parser.add_argument('-c','--clean', action='store_true',
 parser.add_argument('-f' , '--fullscreen', action='store_true',
     help='start program with fullscreen')
 parser.add_argument('-d' , '--difficulty',
-    help='DIFFICULTY = [hard, medium, easy], change AI difficulty, default is medium, ')
+    help='DIFFICULTY = [hard, medium, easy], set AI difficulty, default is medium, ')
+parser.add_argument('-s' , '--size',
+    help='SIZE = WIDTHxHEIGHT, set window size, defualt is 800x600')
 args = vars(parser.parse_args())
 
 if __name__ == '__main__':
     accepted_difficulty = ['hard', 'medium', 'easy']
     difficulty = 'medium'
-        
-    if args['difficulty'].lower() in accepted_difficulty:
-        difficulty = args['difficulty'].lower()
-        print('difficulty: {}'.format(difficulty))
-    else:
-        print('{} is not a valid difficulty option, {}'.format(args['difficulty'], accepted_difficulty))
-        sys.exit()
+    size = '800x600'
+    
+    if args['difficulty']:
+        if args['difficulty'].lower() in accepted_difficulty:
+            difficulty = args['difficulty'].lower()
+            print('difficulty: {}'.format(difficulty))
+        else:
+            print('{} is not a valid difficulty option, {}'.format(args['difficulty'], accepted_difficulty))
+            sys.exit()
+    if args['size']:
+        size = args['size']
         
     if args['clean']:
         data.tools.clean_files()
     else:
-        main(args['fullscreen'], difficulty)
+        main(args['fullscreen'], difficulty, size)
     pg.quit()
 
