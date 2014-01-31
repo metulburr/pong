@@ -11,16 +11,14 @@ parser.add_argument('-c','--clean', action='store_true',
     help='Remove all .pyc files and __pycache__ directories')
 parser.add_argument('-f' , '--fullscreen', action='store_true',
     help='start program with fullscreen')
-parser.add_argument('-d' , '--difficulty',
+parser.add_argument('-d' , '--difficulty', default='medium',
     help='where DIFFICULTY is one of the strings [hard, medium, easy], set AI difficulty, default is medium, ')
-parser.add_argument('-s' , '--size', nargs=2,
+parser.add_argument('-s' , '--size', nargs=2, default=[800,600],
     help='where SIZE SIZE is WIDTH HEIGHT, set window size, defualt is 800 600')
 args = vars(parser.parse_args())
 
 if __name__ == '__main__':
     accepted_difficulty = ['hard', 'medium', 'easy']
-    difficulty = 'medium'
-    size = [800,600]
     
     if args['difficulty']:
         if args['difficulty'].lower() in accepted_difficulty:
