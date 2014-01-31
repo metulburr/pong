@@ -12,15 +12,15 @@ parser.add_argument('-c','--clean', action='store_true',
 parser.add_argument('-f' , '--fullscreen', action='store_true',
     help='start program with fullscreen')
 parser.add_argument('-d' , '--difficulty',
-    help='DIFFICULTY = [hard, medium, easy], set AI difficulty, default is medium, ')
-parser.add_argument('-s' , '--size',
-    help='SIZE = WIDTHxHEIGHT, set window size, defualt is 800x600')
+    help='where DIFFICULTY is one of the strings [hard, medium, easy], set AI difficulty, default is medium, ')
+parser.add_argument('-s' , '--size', nargs=2,
+    help='where SIZE SIZE is WIDTH HEIGHT, set window size, defualt is 800 600')
 args = vars(parser.parse_args())
 
 if __name__ == '__main__':
     accepted_difficulty = ['hard', 'medium', 'easy']
     difficulty = 'medium'
-    size = '800x600'
+    size = [800,600]
     
     if args['difficulty']:
         if args['difficulty'].lower() in accepted_difficulty:
@@ -31,6 +31,7 @@ if __name__ == '__main__':
             sys.exit()
     if args['size']:
         size = args['size']
+        print('window size: {}'.format(size))
         
     if args['clean']:
         data.tools.clean_files()
