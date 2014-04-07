@@ -5,6 +5,7 @@ from .states import classic, menu, mode, options, controls, audio, ghost, splash
 
 class Control():
     def __init__(self, fullscreen, difficulty, size):
+        pg.mixer.pre_init(44100, -16, 1, 512)
         pg.init()
         pg.display.set_caption("Pong")
         self.screensize = (int(size[0]), int(size[1]))
