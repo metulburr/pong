@@ -38,7 +38,7 @@ class Menu(tools.States):
     def update(self, now, keys):
         for ball in self.menu_balls:
             ball.update(self.bogus_rect, self.bogus_rect)
-        pg.mouse.set_visible(True)
+        #pg.mouse.set_visible(True)
         self.mouse_hover_sound()
         self.change_selected_option()
 

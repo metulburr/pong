@@ -30,7 +30,7 @@ class GetKey(tools.States):
 
     def update(self, now, keys):
         self.title, self.title_rect = self.make_text('Change key binding for "{}"'.format(self.action), (75,75,75), (self.screen_rect.centerx, 75), 50)
-        pg.mouse.set_visible(True)
+        #pg.mouse.set_visible(True)
         self.mouse_hover_sound()
 
     def render(self, screen):

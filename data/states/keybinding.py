@@ -81,7 +81,7 @@ class KeyBinding(tools.States):
             button.get_event(event)
 
     def update(self, now, keys):
-        pg.mouse.set_visible(True)
+        #pg.mouse.set_visible(True)
         self.mouse_hover_sound()
         self.change_selected_option()
         for button in self.buttons:
